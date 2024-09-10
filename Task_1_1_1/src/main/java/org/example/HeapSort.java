@@ -16,15 +16,14 @@ public class HeapSort {
             heapify(arr, n, i);
         }
         for (int i = n - 1; i > 0; i--) {
-            int temp = arr[0];
-            arr[0] = arr[i];
-            arr[i] = temp;
+            swap(arr, 0, i);
             heapify(arr, i, 0);
         }
     }
 
     /**
      * Maintains the max-heap property for a subtree rooted at the given index.
+     *
      * @param arr The array representing the heap.
      * @param n   The size of the heap.
      * @param i   The index of the subtree root.
@@ -40,10 +39,21 @@ public class HeapSort {
             largest = right;
         }
         if (largest != i) {
-            int swap = arr[i];
-            arr[i] = arr[largest];
-            arr[largest] = swap;
+            swap(arr, i, largest);
             heapify(arr, n, largest);
         }
+    }
+
+    /**
+     * Swaps two elements in an array.
+     *
+     * @param arr The array.
+     * @param i   The index of the first element.
+     * @param j   The index of the second element.
+     */
+    void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
