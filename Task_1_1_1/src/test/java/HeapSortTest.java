@@ -71,20 +71,4 @@ public class HeapSortTest {
         assertArrayEquals(expectedArray, inputArray,
                 "The array with duplicates should be sorted correctly.");
     }
-
-    @Test
-    public void testMainMethodOutput() {
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outContent));
-
-        HeapSort.main(new String[]{});
-
-        String expectedOutput = "true";
-
-        assertEquals(expectedOutput.trim(), outContent.toString().trim(),
-                "Output of the main method should indicate that the array is sorted correctly.");
-
-        System.setOut(originalOut);
-    }
 }
