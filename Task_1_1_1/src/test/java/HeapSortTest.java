@@ -1,8 +1,11 @@
 package org.example;  // Add this to your test file
 
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * class for testing Heapsort algorithm.
@@ -67,5 +70,21 @@ public class HeapSortTest {
         heapSort.sort(inputArray);
         assertArrayEquals(expectedArray, inputArray,
                 "The array with duplicates should be sorted correctly.");
+    }
+
+    @Test
+    public void testMainMethodOutput() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        HeapSort.main(new String[]{});
+
+        String expectedOutput = "true";
+
+        assertEquals(expectedOutput.trim(), outContent.toString().trim(),
+                "Output of the main method should indicate that the array is sorted correctly.");
+
+        System.setOut(originalOut);
     }
 }
