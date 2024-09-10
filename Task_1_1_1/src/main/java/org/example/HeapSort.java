@@ -56,4 +56,32 @@ public class HeapSort {
         arr[i] = arr[j];
         arr[j] = temp;
     }
+
+    /**
+     * The main method to test the heap sort algorithm.
+     *
+     * @param args Command line arguments.
+     */
+    public static void main(String[] args) {
+        HeapSort heapSort = new HeapSort();
+        int[] arr = {7, 6, 4, 3, 2, 1};
+
+        printArray(arr);
+
+        heapSort.sort(arr);
+
+        printArray(arr);
+    }
+
+    /**
+     * Utility method to print an array.
+     *
+     * @param arr The array to be printed.
+     */
+    static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
 }
