@@ -74,6 +74,7 @@ public class HeapSortTest {
 
     @Test
     public void testMainMethodOutput() {
+        HeapSort.main(new String[]{});
         assertEquals(true, true,
                 "Output of the main method should indicate that the array is sorted correctly.");
 
