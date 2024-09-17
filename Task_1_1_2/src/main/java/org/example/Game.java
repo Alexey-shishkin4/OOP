@@ -1,4 +1,5 @@
 package org.example;
+
 import java.util.Scanner;
 
 
@@ -42,7 +43,8 @@ public class Game {
             if (player.hasBlackjack()) {
                 System.out.println(player.getName() + " has Blackjack! You win!");
                 scores[0]++;
-                System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+                System.out.println("Current Score -> Player: " +
+                        scores[0] + " | Dealer: " + scores[1]);
                 repeat = gameContinue();
                 continue;
             }
@@ -51,7 +53,8 @@ public class Game {
                 if (player.isBusted()) {
                     System.out.println(player.getName() + " busted! You lose.");
                     scores[1]++;
-                    System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+                    System.out.println("Current Score -> Player: "
+                            + scores[0] + " | Dealer: " + scores[1]);
                     repeat = gameContinue();
                     break;
                 }
@@ -66,7 +69,8 @@ public class Game {
             repeat = gameContinue();
         }
 
-        System.out.println("Final Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Final Score -> Player: "
+                + scores[0] + " | Dealer: " + scores[1]);
         System.out.println("Thank you for playing!");
     }
 
@@ -140,7 +144,7 @@ public class Game {
      * Determine Winner in round and edit scores.
      */
     private void determineWinner(int[] scores) {
-        int playerScore = player.getHandValue();
+        final int playerScore = player.getHandValue();
         int dealerScore = dealer.getHandValue();
 
         System.out.println("\nFinal hands:");
