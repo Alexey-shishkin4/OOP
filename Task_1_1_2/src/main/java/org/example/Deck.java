@@ -1,8 +1,8 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * The {@code Deck} class represents a deck

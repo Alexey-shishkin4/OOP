@@ -85,13 +85,9 @@ public class Player {
     }
 
     /**
-     * Displays the player's hand. If the player
-     * is the dealer and the second card should be hidden,
-     * it will display "[Hidden]" for that
-     * card unless all cards should be shown.
+     * Displays the player's hand.
      *
-     * @param showAll {@code true} if all cards should be shown,
-     * {@code false} if the dealer's second card should be hidden
+     * @param showAll {@code true} if all cards should be shown.
      */
     public void showHand(boolean showAll) {
         System.out.println(name + "'s cards:");
