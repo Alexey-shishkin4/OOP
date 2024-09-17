@@ -6,6 +6,10 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.List;
 
+
+/**
+ * Unit tests for the Player class.
+ */
 class PlayerTest {
     private Player player;
     private Player dealer;
@@ -25,14 +29,16 @@ class PlayerTest {
     @Test
     void testTakeCard() {
         player.takeCard(cardAceOfSpades);
-        assertEquals(11, player.getHandValue(), "Player's hand should contain one card.");
+        assertEquals(11, player.getHandValue(),
+                "Player's hand should contain one card.");
     }
 
     @Test
     void testGetHandValueWithAce() {
         player.takeCard(cardAceOfSpades);
         player.takeCard(cardTenOfHearts);
-        assertEquals(21, player.getHandValue(), "Hand value should be 21 with Ace and 10.");
+        assertEquals(21, player.getHandValue(),
+                "Hand value should be 21 with Ace and 10.");
     }
 
     @Test
@@ -40,7 +46,8 @@ class PlayerTest {
         player.takeCard(cardAceOfSpades);
         player.takeCard(cardAceOfSpades);
         player.takeCard(cardTenOfHearts);
-        assertEquals(12, player.getHandValue(), "Hand value should be 12 with two Aces and 10.");
+        assertEquals(12, player.getHandValue(),
+                "Hand value should be 12 with two Aces and 10.");
     }
 
     @Test
@@ -48,14 +55,16 @@ class PlayerTest {
         player.takeCard(cardTenOfHearts);
         player.takeCard(cardTenOfHearts);
         player.takeCard(cardTwoOfDiamonds);
-        assertTrue(player.isBusted(), "Player should be busted with hand value exceeding 21.");
+        assertTrue(player.isBusted(),
+                "Player should be busted with hand value exceeding 21.");
     }
 
     @Test
     void testHasBlackjack() {
         player.takeCard(cardAceOfSpades);
         player.takeCard(cardTenOfHearts);
-        assertTrue(player.hasBlackjack(), "Player should have blackjack with Ace and 10.");
+        assertTrue(player.hasBlackjack(),
+                "Player should have blackjack with Ace and 10.");
     }
 
     @Test
@@ -63,7 +72,8 @@ class PlayerTest {
         player.takeCard(cardAceOfSpades);
         player.takeCard(cardTenOfHearts);
         player.takeCard(cardTwoOfDiamonds);
-        assertFalse(player.hasBlackjack(), "Player should not have blackjack with more than two cards.");
+        assertFalse(player.hasBlackjack(),
+                "Player should not have blackjack with more than two cards.");
     }
 
     @Test
@@ -72,12 +82,14 @@ class PlayerTest {
         dealer.takeCard(cardTenOfHearts);
 
         // Capture system output for verification
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
+        java.io.ByteArrayOutputStream outContent =
+                new java.io.ByteArrayOutputStream();
         System.setOut(new java.io.PrintStream(outContent));
 
         dealer.showHand(false);
         String expectedOutput = "Dealer's cards:\nA of Spades\n[Hidden]\n";
-        assertFalse(outContent.toString().contains(expectedOutput), "Dealer's hand should hide the second card.");
+        assertFalse(outContent.toString().contains(expectedOutput),
+                "Dealer's hand should hide the second card.");
     }
 
     @Test
@@ -90,7 +102,9 @@ class PlayerTest {
         System.setOut(new java.io.PrintStream(outContent));
 
         player.showHand(true);
-        String expectedOutput = "John's cards:\nA of Spades\n10 of Hearts\nYour hand value: 21\n";
-        assertFalse(outContent.toString().contains(expectedOutput), "Player's hand should display all cards.");
+        String expectedOutput =
+                "John's cards:\nA of Spades\n10 of Hearts\nYour hand value: 21\n";
+        assertFalse(outContent.toString().contains(expectedOutput),
+                "Player's hand should display all cards.");
     }
 }

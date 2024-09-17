@@ -4,6 +4,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Unit tests for the Desk class.
+ */
 class DeckTest {
     private Deck deck;
 
@@ -14,7 +17,8 @@ class DeckTest {
 
     @Test
     void testDeckInitialization() {
-        assertEquals(52, deck.getCardCount(), "Deck should be initialized with 52 cards");
+        assertEquals(52, deck.getCardCount(),
+                "Deck should be initialized with 52 cards");
     }
 
     @Test
@@ -22,7 +26,8 @@ class DeckTest {
         int initialSize = deck.getCardCount();
         Card dealtCard = deck.dealCard();
         assertNotNull(dealtCard, "Dealt card should not be null");
-        assertEquals(initialSize - 1, deck.getCardCount(), "Deck size should decrease by 1 after dealing a card");
+        assertEquals(initialSize - 1, deck.getCardCount(),
+                "Deck size should decrease by 1 after dealing a card");
     }
 
     @Test
@@ -38,7 +43,8 @@ class DeckTest {
             }
         }
 
-        assertFalse(isSameOrder, "The order of cards should change after shuffling");
+        assertFalse(isSameOrder,
+                "The order of cards should change after shuffling");
     }
 
     @Test
@@ -47,6 +53,7 @@ class DeckTest {
             deck.dealCard();
         }
 
-        assertThrows(IndexOutOfBoundsException.class, () -> deck.dealCard(), "Should throw an exception when dealing from an empty deck");
+        assertThrows(IndexOutOfBoundsException.class,
+                () -> deck.dealCard(), "Should throw an exception when dealing from an empty deck");
     }
 }

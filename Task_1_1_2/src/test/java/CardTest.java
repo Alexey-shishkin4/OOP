@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the {@code Card} class.
+ * Unit tests for the code Card class.
  */
 public class CardTest {
 
@@ -14,7 +14,8 @@ public class CardTest {
     @Test
     public void testGetRank() {
         Card card = new Card("A", "Hearts");
-        assertEquals("A", card.getRank(), "Card rank should be 'A'");
+        assertEquals("A", card.getRank(),
+                "Card rank should be 'A'");
     }
 
     /**
@@ -23,7 +24,8 @@ public class CardTest {
     @Test
     public void testGetSuit() {
         Card card = new Card("A", "Hearts");
-        assertEquals("Hearts", card.getSuit(), "Card suit should be 'Hearts'");
+        assertEquals("Hearts", card.getSuit(),
+                "Card suit should be 'Hearts'");
     }
 
     /**
@@ -32,7 +34,8 @@ public class CardTest {
     @Test
     public void testGetValue_NumberCard() {
         Card card = new Card("7", "Diamonds");
-        assertEquals(7, card.getValue(), "Card value for '7' should be 7");
+        assertEquals(7, card.getValue(),
+                "Card value for '7' should be 7");
     }
 
     /**
@@ -42,7 +45,8 @@ public class CardTest {
     @Test
     public void testGetValue_FaceCard() {
         Card card = new Card("K", "Spades");
-        assertEquals(10, card.getValue(), "Card value for 'K' should be 10");
+        assertEquals(10, card.getValue(),
+                "Card value for 'K' should be 10");
     }
 
     /**
@@ -52,7 +56,8 @@ public class CardTest {
     @Test
     public void testGetValue_Ace() {
         Card card = new Card("A", "Clubs");
-        assertEquals(11, card.getValue(), "Card value for 'A' should be 11");
+        assertEquals(11, card.getValue(),
+                "Card value for 'A' should be 11");
     }
 
     /**
@@ -62,7 +67,8 @@ public class CardTest {
     @Test
     public void testToString() {
         Card card = new Card("A", "Hearts");
-        assertEquals("A of Hearts", card.toString(), "Card string should be 'A of Hearts'");
+        assertEquals("A of Hearts", card.toString(),
+                "Card string should be 'A of Hearts'");
     }
 
     /**
@@ -72,6 +78,7 @@ public class CardTest {
     @Test
     public void testGetValue_InvalidRank() {
         Card card = new Card("Z", "Hearts");
-        assertEquals(0, card.getValue(), "Invalid rank 'Z' should return value 0");
+        assertEquals(0, card.getValue(),
+                "Invalid rank 'Z' should return value 0");
     }
 }
