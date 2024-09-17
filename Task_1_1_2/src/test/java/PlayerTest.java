@@ -88,7 +88,7 @@ class PlayerTest {
 
         dealer.showHand(false);
         String expectedOutput = "Dealer's cards:\nA of Spades\n[Hidden]\n";
-        assertFalse(outContent.toString().contains(expectedOutput),
+        assertTrue(outContent.toString().contains(expectedOutput),
                 "Dealer's hand should hide the second card.");
     }
 
@@ -104,7 +104,7 @@ class PlayerTest {
         player.showHand(true);
         String expectedOutput =
                 "John's cards:\nA of Spades\n10 of Hearts\nYour hand value: 21\n";
-        assertFalse(outContent.toString().contains(expectedOutput),
+        assertTrue(outContent.toString().contains(expectedOutput),
                 "Player's hand should display all cards.");
     }
 }
