@@ -1,7 +1,7 @@
 package org.example;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /*
@@ -78,8 +78,9 @@ public class Player {
                 System.out.println(hand.get(i));
             }
         }
-        if (!isDealer)
+        if (!isDealer) {
             System.out.println("Your hand value: " + getHandValue());
+        }
     }
 
     /*
