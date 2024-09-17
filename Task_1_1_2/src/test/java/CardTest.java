@@ -1,7 +1,9 @@
 package org.example;
 
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 
 /**
  * Unit tests for the code Card class.
