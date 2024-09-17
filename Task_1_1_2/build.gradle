@@ -10,6 +10,12 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.7.1'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    // Mockito core library
+    testImplementation 'org.mockito:mockito-core:4.0.0'
+
+    // Mockito JUnit Jupiter integration
+    testImplementation 'org.mockito:mockito-junit-jupiter:4.0.0'
 }
 
 tasks.named('test', Test) {
