@@ -41,7 +41,8 @@ public class Game {
             dealer.showHand(false);
 
             if (player.hasBlackjack()) {
-                System.out.println(player.getName() + " has Blackjack! You win!");
+                System.out.println(player.getName()
+                        + " has Blackjack! You win!");
                 scores[0]++;
                 System.out.println("Current Score -> Player: " +
                         scores[0] + " | Dealer: " + scores[1]);
@@ -145,7 +146,7 @@ public class Game {
      */
     private void determineWinner(int[] scores) {
         final int playerScore = player.getHandValue();
-        int dealerScore = dealer.getHandValue();
+        final int dealerScore = dealer.getHandValue();
 
         System.out.println("\nFinal hands:");
         player.showHand(true);
@@ -169,7 +170,8 @@ public class Game {
             System.out.println("It's a tie!");
         }
 
-        System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Current Score -> Player: "
+                + scores[0] + " | Dealer: " + scores[1]);
     }
 
     /*
