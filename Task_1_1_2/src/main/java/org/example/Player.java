@@ -3,17 +3,21 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 
-
-/*
- * Player class for blackjack game.
+/**
+ * The {@code Player} class represents a player in a blackjack game.
+ * A player can be either the actual player or the dealer, and this class manages the player's hand,
+ * tracks the hand value, and provides methods for checking the status of the hand (e.g., busted or blackjack).
  */
 public class Player {
     private List<Card> hand;
     private String name;
     private boolean isDealer;
 
-    /*
-     * Init player class.
+    /**
+     * Initializes a new {@code Player} with a name and a boolean indicating if the player is the dealer.
+     *
+     * @param name     the name of the player
+     * @param isDealer {@code true} if the player is the dealer, {@code false} if the player is a regular player
      */
     public Player(String name, boolean isDealer) {
         this.name = name;
@@ -21,21 +25,26 @@ public class Player {
         hand = new ArrayList<>();
     }
 
-    /*
-     * Take card.
+    /**
+     * Adds a card to the player's hand.
+     *
+     * @param card the {@code Card} object to be added to the player's hand
      */
     public void takeCard(Card card) {
         hand.add(card);
     }
 
-    /*
-     * Count value of cards in hand.
+    /**
+     * Calculates and returns the total value of the player's hand based on blackjack rules.
+     * Aces count as 11 unless the total value exceeds 21, in which case each ace counts as 1.
+     *
+     * @return the total value of the player's hand
      */
     public int getHandValue() {
         int totalValue = 0;
         int aces = 0;
 
-        // Подсчет суммы карт в руке
+        // Calculate total hand value and count aces
         for (Card card : hand) {
             totalValue += card.getValue();
             if (card.getRank().equals("A")) {
@@ -43,7 +52,7 @@ public class Player {
             }
         }
 
-        // Если сумма превышает 21 и есть тузы, уменьшаем их значение до 1
+        // Adjust aces value if the total exceeds 21
         while (totalValue > 21 && aces > 0) {
             totalValue -= 10;
             aces--;
@@ -52,22 +61,30 @@ public class Player {
         return totalValue;
     }
 
-    /*
-     * Check value of cards in hand > 21
+    /**
+     * Checks if the player's hand value exceeds 21, indicating a bust.
+     *
+     * @return {@code true} if the hand value exceeds 21, otherwise {@code false}
      */
     public boolean isBusted() {
         return getHandValue() > 21;
     }
 
-    /*
-     * Check blackjack.
+    /**
+     * Checks if the player has a blackjack, which occurs when the player has exactly two cards
+     * and the hand value equals 21.
+     *
+     * @return {@code true} if the player has a blackjack, otherwise {@code false}
      */
     public boolean hasBlackjack() {
         return hand.size() == 2 && getHandValue() == 21;
     }
 
-    /*
-     * Print player hand.
+    /**
+     * Displays the player's hand. If the player is the dealer and the second card should be hidden,
+     * it will display "[Hidden]" for that card unless all cards should be shown.
+     *
+     * @param showAll {@code true} if all cards should be shown, {@code false} if the dealer's second card should be hidden
      */
     public void showHand(boolean showAll) {
         System.out.println(name + "'s cards:");
@@ -83,8 +100,10 @@ public class Player {
         }
     }
 
-    /*
-     * Return player name.
+    /**
+     * Returns the name of the player.
+     *
+     * @return the player's name as a {@code String}
      */
     public String getName() {
         return name;

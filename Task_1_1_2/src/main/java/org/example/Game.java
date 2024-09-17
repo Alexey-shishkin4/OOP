@@ -2,17 +2,19 @@ package org.example;
 
 import java.util.Scanner;
 
-
-/*
- * Class for implementing the game blackjack.
+/**
+ * The {@code Game} class implements the core logic of a blackjack game.
+ * It handles the flow of the game, including dealing cards, tracking turns for both the player and the dealer,
+ * and determining the winner of each round. The game continues in a loop until the player chooses to exit.
  */
 public class Game {
     private Deck deck;
     private Player player;
     private Player dealer;
 
-    /*
-     * Create a new desk and players.
+    /**
+     * Initializes a new {@code Game} object by creating a new deck and two players:
+     * one for the player and one for the dealer.
      */
     public Game() {
         deck = new Deck();
@@ -20,17 +22,19 @@ public class Game {
         dealer = new Player("Dealer", true);
     }
 
-    /*
-     * Start a game.
+    /**
+     * Starts the game loop, which includes dealing cards, handling turns for the player and the dealer,
+     * determining the winner, and asking the player if they wish to continue playing or end the game.
+     * Scores are tracked for both the player and the dealer over multiple rounds.
      */
     public void play() {
-        int[] scores = {0, 0};
+        int[] scores = {0, 0};  // Scores for player and dealer
         boolean repeat = true;
 
         while (repeat) {
             resetHands();
 
-            // Начальная раздача
+            // Initial card dealing
             player.takeCard(deck.dealCard());
             player.takeCard(deck.dealCard());
             dealer.takeCard(deck.dealCard());
@@ -41,21 +45,19 @@ public class Game {
             dealer.showHand(false);
 
             if (player.hasBlackjack()) {
-                System.out.println(player.getName()
-                        + " has Blackjack! You win!");
+                System.out.println(player.getName() + " has Blackjack! You win!");
                 scores[0]++;
-                System.out.println("Current Score -> Player: " +
-                        scores[0] + " | Dealer: " + scores[1]);
+                System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
                 repeat = gameContinue();
                 continue;
             }
 
+            // Player's turn
             while (playerTurn()) {
                 if (player.isBusted()) {
                     System.out.println(player.getName() + " busted! You lose.");
                     scores[1]++;
-                    System.out.println("Current Score -> Player: "
-                            + scores[0] + " | Dealer: " + scores[1]);
+                    System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
                     repeat = gameContinue();
                     break;
                 }
@@ -65,30 +67,32 @@ public class Game {
                 dealerTurn();
             }
 
+            // Determine the round winner
             determineWinner(scores);
 
             repeat = gameContinue();
         }
 
-        System.out.println("Final Score -> Player: "
-                + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Final Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
         System.out.println("Thank you for playing!");
     }
 
-    /*
-     * Reset hands for new round.
+    /**
+     * Resets the hands of both the player and the dealer for the next round.
      */
     private void resetHands() {
         player = new Player("Player", false);
         dealer = new Player("Dealer", true);
     }
 
-    /*
-     * Ask player to continue game.
+    /**
+     * Prompts the player to decide whether to continue playing or finish the game.
+     *
+     * @return {@code true} if the player wants to continue, {@code false} to end the game
      */
     private boolean gameContinue() {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Do you want to continue playing or finish? (c/e):");
+        System.out.print("Do you want to continue playing or finish? (c/e): ");
         String action = scanner.nextLine();
 
         if (action.equalsIgnoreCase("c")) {
@@ -101,8 +105,10 @@ public class Game {
         }
     }
 
-    /*
-     * Check player turn.
+    /**
+     * Handles the player's turn. The player is asked to choose whether to "hit" (take a card) or "stand" (end their turn).
+     *
+     * @return {@code true} if the player chooses to hit, {@code false} to end their turn
      */
     private boolean playerTurn() {
         Scanner scanner = new Scanner(System.in);
@@ -121,8 +127,9 @@ public class Game {
         }
     }
 
-    /*
-     * Dealer turn.
+    /**
+     * Handles the dealer's turn. The dealer keeps drawing cards until their hand value is at least 17.
+     * If the dealer's hand exceeds 21, they bust.
      */
     private void dealerTurn() {
         System.out.println("\nDealer's turn.");
@@ -141,8 +148,10 @@ public class Game {
         }
     }
 
-    /*
-     * Determine Winner in round and edit scores.
+    /**
+     * Compares the player's and dealer's hands to determine the winner of the round. Updates the scores accordingly.
+     *
+     * @param scores an array storing the current scores for both the player and dealer
      */
     private void determineWinner(int[] scores) {
         final int playerScore = player.getHandValue();
@@ -170,12 +179,13 @@ public class Game {
             System.out.println("It's a tie!");
         }
 
-        System.out.println("Current Score -> Player: "
-                + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
     }
 
-    /*
-     * main method.
+    /**
+     * The main method to run the blackjack game.
+     *
+     * @param args the command-line arguments (not used)
      */
     public static void main(String[] args) {
         Game game = new Game();

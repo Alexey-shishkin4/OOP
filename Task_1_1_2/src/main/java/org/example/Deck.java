@@ -4,15 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Collections;
 
-
-/*
- * Deck class for blackjack game.
+/**
+ * The {@code Deck} class represents a deck of 52 playing cards used in a blackjack game.
+ * It provides methods to initialize, shuffle, and deal cards to players.
  */
 public class Deck {
     private List<Card> cards;
 
-    /*
-     * init Deck.
+    /**
+     * Initializes a new deck of 52 cards. The deck consists of cards from 4 suits
+     * ("Hearts", "Diamonds", "Clubs", "Spades") and 13 ranks (2-10, J, Q, K, A).
+     * After initialization, the deck is automatically shuffled.
      */
     public Deck() {
         cards = new ArrayList<>();
@@ -25,20 +27,23 @@ public class Deck {
             }
         }
 
-        shuffle();
+        shuffle();  // Shuffle the deck after creation
     }
 
-    /*
-     * Shuffle cards.
+    /**
+     * Shuffles the deck of cards using the {@code Collections.shuffle()} method to randomize the order.
      */
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
-    /*
-     * Deal card.
+    /**
+     * Deals a card from the deck. Removes and returns the last card from the deck.
+     * If the deck is empty, it will throw an exception (handled elsewhere).
+     *
+     * @return the {@code Card} object representing the card dealt from the deck
      */
     public Card dealCard() {
-        return cards.removeLast();
+        return cards.remove(cards.size() - 1);  // Deals the last card
     }
 }
