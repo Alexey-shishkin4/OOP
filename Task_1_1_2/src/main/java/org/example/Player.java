@@ -39,10 +39,7 @@ public class Player {
     }
 
     /**
-     * Calculates and returns the total value of
-     * the player's hand based on blackjack rules.
-     * Aces count as 11 unless the total value exceeds 21,
-     * in which case each ace counts as 1.
+     * Calculates and returns the total value of the player's hand.
      *
      * @return the total value of the player's hand
      */

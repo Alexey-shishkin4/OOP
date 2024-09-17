@@ -49,12 +49,17 @@ public class Card {
      * @return the point value of the card as an {@code int}
      */
     public int getValue() {
-        return switch (rank) {
-            case "2", "3", "4", "5", "6", "7", "8", "9", "10" -> Integer.parseInt(rank);
-            case "J", "Q", "K" -> 10;
-            case "A" -> 11;
-            default -> 0;
-        };
+        switch (rank) {
+            case "2": case "3": case "4": case "5": case "6":
+            case "7": case "8": case "9": case "10":
+                return Integer.parseInt(rank);
+            case "J": case "Q": case "K":
+                return 10;
+            case "A":
+                return 11;
+            default:
+                return 0;
+        }
     }
 
     /**
