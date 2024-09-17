@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 /**
  * The {@code Game} class implements the core logic of a blackjack game.
- * It handles the flow of the game, including dealing cards, tracking turns for both the player and the dealer,
- * and determining the winner of each round. The game continues in a loop until the player chooses to exit.
  */
 public class Game {
     private Deck deck;
@@ -23,9 +21,12 @@ public class Game {
     }
 
     /**
-     * Starts the game loop, which includes dealing cards, handling turns for the player and the dealer,
-     * determining the winner, and asking the player if they wish to continue playing or end the game.
-     * Scores are tracked for both the player and the dealer over multiple rounds.
+     * Starts the game loop, which includes dealing cards,
+     * handling turns for the player and the dealer,
+     * determining the winner, and asking the player
+     * if they wish to continue playing or end the game.
+     * Scores are tracked for both the player
+     * and the dealer over multiple rounds.
      */
     public void play() {
         int[] scores = {0, 0};  // Scores for player and dealer
@@ -47,7 +48,8 @@ public class Game {
             if (player.hasBlackjack()) {
                 System.out.println(player.getName() + " has Blackjack! You win!");
                 scores[0]++;
-                System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+                System.out.println("Current Score -> Player: "
+                        + scores[0] + " | Dealer: " + scores[1]);
                 repeat = gameContinue();
                 continue;
             }
@@ -57,7 +59,8 @@ public class Game {
                 if (player.isBusted()) {
                     System.out.println(player.getName() + " busted! You lose.");
                     scores[1]++;
-                    System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+                    System.out.println("Current Score -> Player: "
+                            + scores[0] + " | Dealer: " + scores[1]);
                     repeat = gameContinue();
                     break;
                 }
@@ -73,7 +76,8 @@ public class Game {
             repeat = gameContinue();
         }
 
-        System.out.println("Final Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Final Score -> Player: "
+                + scores[0] + " | Dealer: " + scores[1]);
         System.out.println("Thank you for playing!");
     }
 
@@ -106,7 +110,8 @@ public class Game {
     }
 
     /**
-     * Handles the player's turn. The player is asked to choose whether to "hit" (take a card) or "stand" (end their turn).
+     * Handles the player's turn. The player is asked to choose
+     * whether to "hit" (take a card) or "stand" (end their turn).
      *
      * @return {@code true} if the player chooses to hit, {@code false} to end their turn
      */
@@ -128,7 +133,8 @@ public class Game {
     }
 
     /**
-     * Handles the dealer's turn. The dealer keeps drawing cards until their hand value is at least 17.
+     * Handles the dealer's turn. The dealer keeps
+     * drawing cards until their hand value is at least 17.
      * If the dealer's hand exceeds 21, they bust.
      */
     private void dealerTurn() {
@@ -149,7 +155,8 @@ public class Game {
     }
 
     /**
-     * Compares the player's and dealer's hands to determine the winner of the round. Updates the scores accordingly.
+     * Compares the player's and dealer's hands to
+     * determine the winner of the round. Updates the scores accordingly.
      *
      * @param scores an array storing the current scores for both the player and dealer
      */
@@ -179,7 +186,8 @@ public class Game {
             System.out.println("It's a tie!");
         }
 
-        System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Current Score -> Player: "
+                + scores[0] + " | Dealer: " + scores[1]);
     }
 
     /**

@@ -5,8 +5,10 @@ import java.util.List;
 
 /**
  * The {@code Player} class represents a player in a blackjack game.
- * A player can be either the actual player or the dealer, and this class manages the player's hand,
- * tracks the hand value, and provides methods for checking the status of the hand (e.g., busted or blackjack).
+ * A player can be either the actual player
+ * or the dealer, and this class manages the player's hand,
+ * tracks the hand value, and provides
+ * methods for checking the status of the hand (e.g., busted or blackjack).
  */
 public class Player {
     private List<Card> hand;
@@ -14,10 +16,12 @@ public class Player {
     private boolean isDealer;
 
     /**
-     * Initializes a new {@code Player} with a name and a boolean indicating if the player is the dealer.
+     * Initializes a new {@code Player} with a name and
+     * a boolean indicating if the player is the dealer.
      *
      * @param name     the name of the player
-     * @param isDealer {@code true} if the player is the dealer, {@code false} if the player is a regular player
+     * @param isDealer {@code true} if the player is the dealer,
+     * {@code false} if the player is a regular player
      */
     public Player(String name, boolean isDealer) {
         this.name = name;
@@ -35,8 +39,10 @@ public class Player {
     }
 
     /**
-     * Calculates and returns the total value of the player's hand based on blackjack rules.
-     * Aces count as 11 unless the total value exceeds 21, in which case each ace counts as 1.
+     * Calculates and returns the total value of
+     * the player's hand based on blackjack rules.
+     * Aces count as 11 unless the total value exceeds 21,
+     * in which case each ace counts as 1.
      *
      * @return the total value of the player's hand
      */
@@ -71,7 +77,8 @@ public class Player {
     }
 
     /**
-     * Checks if the player has a blackjack, which occurs when the player has exactly two cards
+     * Checks if the player has a blackjack, which occurs
+     * when the player has exactly two cards
      * and the hand value equals 21.
      *
      * @return {@code true} if the player has a blackjack, otherwise {@code false}
@@ -81,10 +88,13 @@ public class Player {
     }
 
     /**
-     * Displays the player's hand. If the player is the dealer and the second card should be hidden,
-     * it will display "[Hidden]" for that card unless all cards should be shown.
+     * Displays the player's hand. If the player
+     * is the dealer and the second card should be hidden,
+     * it will display "[Hidden]" for that
+     * card unless all cards should be shown.
      *
-     * @param showAll {@code true} if all cards should be shown, {@code false} if the dealer's second card should be hidden
+     * @param showAll {@code true} if all cards should be shown,
+     * {@code false} if the dealer's second card should be hidden
      */
     public void showHand(boolean showAll) {
         System.out.println(name + "'s cards:");

@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.Collections;
 
 /**
- * The {@code Deck} class represents a deck of 52 playing cards used in a blackjack game.
- * It provides methods to initialize, shuffle, and deal cards to players.
+ * The {@code Deck} class represents a deck
+ * of 52 playing cards used in a blackjack game.
+ * It provides methods to initialize,
+ * shuffle, and deal cards to players.
  */
 public class Deck {
     private List<Card> cards;
@@ -31,7 +33,8 @@ public class Deck {
     }
 
     /**
-     * Shuffles the deck of cards using the {@code Collections.shuffle()} method to randomize the order.
+     * Shuffles the deck of cards using the
+     * {@code Collections.shuffle()} method to randomize the order.
      */
     public void shuffle() {
         Collections.shuffle(cards);
