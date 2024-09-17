@@ -49,4 +49,13 @@ public class Deck {
     public Card dealCard() {
         return cards.remove(cards.size() - 1);  // Deals the last card
     }
+
+    /**
+     * Возвращает количество карт в колоде.
+     *
+     * @return количество карт в колоде
+     */
+    public int getCardCount() {
+        return cards.size();
+    }
 }
