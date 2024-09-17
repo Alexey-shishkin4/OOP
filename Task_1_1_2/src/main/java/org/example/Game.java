@@ -2,23 +2,31 @@ package org.example;
 import java.util.Scanner;
 
 
+/*
+ * Class for implementing the game blackjack.
+ */
 public class Game {
     private Deck deck;
     private Player player;
     private Player dealer;
 
+    /*
+     * Create a new desk and players.
+     */
     public Game() {
         deck = new Deck();
         player = new Player("Player", false);
         dealer = new Player("Dealer", true);
     }
 
+    /*
+     * Start a game.
+     */
     public void play() {
         int[] scores = {0, 0};
         boolean repeat = true;
 
         while (repeat) {
-            // Очистка рук игроков в начале нового раунда
             resetHands();
 
             // Начальная раздача
@@ -31,7 +39,6 @@ public class Game {
             player.showHand(true);
             dealer.showHand(false);
 
-            // Проверка на блэкджек
             if (player.hasBlackjack()) {
                 System.out.println(player.getName() + " has Blackjack! You win!");
                 scores[0]++;
@@ -40,7 +47,6 @@ public class Game {
                 continue;
             }
 
-            // Ход игрока
             while (playerTurn()) {
                 if (player.isBusted()) {
                     System.out.println(player.getName() + " busted! You lose.");
@@ -51,15 +57,12 @@ public class Game {
                 }
             }
 
-            // Если игрок не проиграл, выполняем ход дилера
             if (!player.isBusted()) {
                 dealerTurn();
             }
 
-            // Проверка результата игры
             determineWinner(scores);
 
-            // Запрашиваем у игрока, хочет ли он продолжить игру
             repeat = gameContinue();
         }
 
@@ -67,11 +70,17 @@ public class Game {
         System.out.println("Thank you for playing!");
     }
 
+    /*
+     * Reset hands for new round.
+     */
     private void resetHands() {
         player = new Player("Player", false);
         dealer = new Player("Dealer", true);
     }
 
+    /*
+     * Ask player to continue game.
+     */
     private boolean gameContinue() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Do you want to continue playing or finish? (c/e):");
@@ -87,6 +96,9 @@ public class Game {
         }
     }
 
+    /*
+     * Check player turn.
+     */
     private boolean playerTurn() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Do you want to hit or stand? (h/s): ");
@@ -104,6 +116,9 @@ public class Game {
         }
     }
 
+    /*
+     * Dealer turn.
+     */
     private void dealerTurn() {
         System.out.println("\nDealer's turn.");
         dealer.showHand(true);
@@ -121,6 +136,9 @@ public class Game {
         }
     }
 
+    /*
+     * Determine Winner in round and edit scores.
+     */
     private void determineWinner(int[] scores) {
         int playerScore = player.getHandValue();
         int dealerScore = dealer.getHandValue();
@@ -150,6 +168,9 @@ public class Game {
         System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
     }
 
+    /*
+     * main method.
+     */
     public static void main(String[] args) {
         Game game = new Game();
         game.play();

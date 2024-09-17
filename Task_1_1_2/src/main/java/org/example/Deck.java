@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 
+/*
+ * Deck class for blackjack game.
+ */
 public class Deck {
     private List<Card> cards;
 
+    /*
+     * init Deck.
+     */
     public Deck() {
         cards = new ArrayList<>();
         String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
@@ -21,11 +27,16 @@ public class Deck {
         shuffle();
     }
 
+    /*
+     * Shuffle cards.
+     */
     public void shuffle() {
         Collections.shuffle(cards);
     }
 
-    // Вытянуть карту из колоды
+    /*
+     * Deal card.
+     */
     public Card dealCard() {
         return cards.removeLast();
     }
