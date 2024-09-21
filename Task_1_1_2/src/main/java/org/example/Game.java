@@ -143,7 +143,7 @@ public class Game {
      * drawing cards until their hand value is at least 17.
      * If the dealer's hand exceeds 21, they bust.
      */
-    private void dealerTurn() {
+    public void dealerTurn() {
         System.out.println("\nDealer's turn.");
         showPlayerHand(dealer, true);
 
@@ -166,7 +166,7 @@ public class Game {
      *
      * @return A string indicating the result of the round: "PLAYER_WIN", "DEALER_WIN", "TIE", or "PLAYER_BUSTED", "DEALER_BUSTED"
      */
-    private String determineWinnerResult() {
+    public String determineWinnerResult() {
         final int playerScore = player.getHandValue();
         final int dealerScore = dealer.getHandValue();
 
@@ -250,6 +250,14 @@ public class Game {
         if (!player.isDealer()) {
             System.out.println("Your hand value: " + player.getHandValue());
         }
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Player getDealer() {
+        return dealer;
     }
 
 }

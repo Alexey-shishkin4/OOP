@@ -28,7 +28,7 @@ public class GameTest {
     @Test
     public void testPlayerBlackjack() {
         // Test scenario where player starts with a blackjack
-        Player player = new Player("Player", false);
+        Player player = game.getPlayer();
         player.takeCard(new Card("A", "Hearts"));
         player.takeCard(new Card("K", "Spades"));
         assertTrue(player.hasBlackjack(), "Player should have Blackjack");
@@ -37,7 +37,7 @@ public class GameTest {
     @Test
     public void testPlayerBust() {
         // Test scenario where the player busts
-        Player player = new Player("Player", false);
+        Player player = game.getPlayer();
         player.takeCard(new Card("10", "Diamonds"));
         player.takeCard(new Card("8", "Hearts"));
         player.takeCard(new Card("5", "Clubs"));
@@ -46,49 +46,41 @@ public class GameTest {
 
     @Test
     public void testDealerHitsUntil17() {
-        // Test scenario where the dealer hits until reaching a hand value of at least 17
-        Player dealer = new Player("Dealer", true);
-        Deck deck = new Deck();
+        // Simulate the dealer's turn to check if they hit until reaching 17
+        game.dealerTurn();
 
-        dealer.takeCard(new Card("5", "Diamonds"));
-        dealer.takeCard(new Card("6", "Hearts"));
-
-        // Simulate the dealer's turn (dealer should hit until reaching 17 or more)
-        while (dealer.getHandValue() < 17) {
-            dealer.takeCard(deck.dealCard());
-        }
-
+        Player dealer = game.getDealer();
         assertTrue(dealer.getHandValue() >= 17,
                 "Dealer should have hand value of at least 17");
     }
 
     @Test
     public void testPlayerWinsWithHigherScore() {
-        // Test a scenario where the player wins with a higher score than the dealer
-        Player player = new Player("Player", false);
-        Player dealer = new Player("Dealer", true);
+        // Test scenario where the player wins with a higher score than the dealer
+        Player player = game.getPlayer();
+        Player dealer = game.getDealer();
 
         player.takeCard(new Card("10", "Hearts"));
         player.takeCard(new Card("7", "Diamonds"));
         dealer.takeCard(new Card("9", "Clubs"));
         dealer.takeCard(new Card("7", "Hearts"));
 
-        assertTrue(player.getHandValue() > dealer.getHandValue(),
-                "Player should win with higher score");
+        String result = game.determineWinnerResult();
+        assertEquals("PLAYER_WIN", result, "Player should win with higher score");
     }
 
     @Test
     public void testPlayerAndDealerTie() {
         // Test scenario where player and dealer tie
-        Player player = new Player("Player", false);
-        Player dealer = new Player("Dealer", true);
+        Player player = game.getPlayer();
+        Player dealer = game.getDealer();
 
         player.takeCard(new Card("10", "Hearts"));
         player.takeCard(new Card("8", "Diamonds"));
         dealer.takeCard(new Card("10", "Clubs"));
         dealer.takeCard(new Card("8", "Hearts"));
 
-        assertEquals(player.getHandValue(), dealer.getHandValue(),
-                "Player and dealer should have the same score and tie");
+        String result = game.determineWinnerResult();
+        assertEquals("TIE", result, "Player and dealer should have the same score and tie");
     }
 }

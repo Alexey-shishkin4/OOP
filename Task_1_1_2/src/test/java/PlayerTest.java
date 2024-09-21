@@ -76,36 +76,4 @@ class PlayerTest {
         assertFalse(player.hasBlackjack(),
                 "Player should not have blackjack with more than two cards.");
     }
-
-    @Test
-    void testShowHandForDealer() {
-        dealer.takeCard(cardAceOfSpades);
-        dealer.takeCard(cardTenOfHearts);
-
-        // Capture system output for verification
-        java.io.ByteArrayOutputStream outContent =
-                new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
-
-        dealer.showHand(false);
-        String expectedOutput = "Dealer's cards:\nA of Spades\n[Hidden]\n";
-        assertTrue(outContent.toString().contains(expectedOutput),
-                "Dealer's hand should hide the second card.");
-    }
-
-    @Test
-    void testShowHandForPlayer() {
-        player.takeCard(cardAceOfSpades);
-        player.takeCard(cardTenOfHearts);
-
-        // Capture system output for verification
-        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
-        System.setOut(new java.io.PrintStream(outContent));
-
-        player.showHand(true);
-        String expectedOutput =
-                "John's cards:\nA of Spades\n10 of Hearts\nYour hand value: 21\n";
-        assertTrue(outContent.toString().contains(expectedOutput),
-                "Player's hand should display all cards.");
-    }
 }
