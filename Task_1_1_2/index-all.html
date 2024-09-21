@@ -106,6 +106,14 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <div class="block">Initializes a new <code>Card</code> object
  with the specified rank and suit.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/example/Player.html#clearHand()">clearHand()</a></span> - Method in class org.example.<a href="org/example/Player.html" title="class in org.example">Player</a></dt>
+<dd>
+<div class="block">Clears the player's hand</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/example/Card.html#close()">close()</a></span> - Method in class org.example.<a href="org/example/Card.html" title="class in org.example">Card</a></dt>
+<dd>
+<div class="block">Sets the card to be closed (hidden).</div>
+</dd>
 </dl>
 <a id="I:D">
 <!--   -->
@@ -116,6 +124,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Deals a card from the deck.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/example/Game.html#dealerTurn()">dealerTurn()</a></span> - Method in class org.example.<a href="org/example/Game.html" title="class in org.example">Game</a></dt>
+<dd>
+<div class="block">Handles the dealer's turn.</div>
+</dd>
 <dt><a href="org/example/Deck.html" title="class in org.example"><span class="typeNameLink">Deck</span></a> - Class in <a href="org/example/package-summary.html">org.example</a></dt>
 <dd>
 <div class="block">The <code>Deck</code> class represents a deck
@@ -124,6 +136,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dt><span class="memberNameLink"><a href="org/example/Deck.html#%3Cinit%3E()">Deck()</a></span> - Constructor for class org.example.<a href="org/example/Deck.html" title="class in org.example">Deck</a></dt>
 <dd>
 <div class="block">Initializes a new deck of 52 cards.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="org/example/Game.html#determineWinnerResult()">determineWinnerResult()</a></span> - Method in class org.example.<a href="org/example/Game.html" title="class in org.example">Game</a></dt>
+<dd>
+<div class="block">Compares the player's and dealer's hands to determine the winner of the round.</div>
 </dd>
 </dl>
 <a id="I:G">
@@ -144,6 +160,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Возвращает количество карт в колоде.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/example/Game.html#getDealer()">getDealer()</a></span> - Method in class org.example.<a href="org/example/Game.html" title="class in org.example">Game</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="org/example/Player.html#getHand()">getHand()</a></span> - Method in class org.example.<a href="org/example/Player.html" title="class in org.example">Player</a></dt>
+<dd>
+<div class="block">Returns the list of cards in the player's hand.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="org/example/Player.html#getHandValue()">getHandValue()</a></span> - Method in class org.example.<a href="org/example/Player.html" title="class in org.example">Player</a></dt>
 <dd>
 <div class="block">Calculates and returns the total value of the player's hand.</div>
@@ -152,6 +174,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Returns the name of the player.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/example/Game.html#getPlayer()">getPlayer()</a></span> - Method in class org.example.<a href="org/example/Game.html" title="class in org.example">Game</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/example/Card.html#getRank()">getRank()</a></span> - Method in class org.example.<a href="org/example/Card.html" title="class in org.example">Card</a></dt>
 <dd>
 <div class="block">Returns the rank of the card.</div>
@@ -187,6 +211,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <dd>
 <div class="block">Checks if the player's hand value exceeds 21, indicating a bust.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="org/example/Player.html#isDealer()">isDealer()</a></span> - Method in class org.example.<a href="org/example/Player.html" title="class in org.example">Player</a></dt>
+<dd>
+<div class="block">Returns player is dealer.</div>
+</dd>
 </dl>
 <a id="I:M">
 <!--   -->
@@ -203,6 +231,10 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">O</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="org/example/Card.html#open()">open()</a></span> - Method in class org.example.<a href="org/example/Card.html" title="class in org.example">Card</a></dt>
+<dd>
+<div class="block">Sets the card to be open (visible).</div>
+</dd>
 <dt><a href="org/example/package-summary.html">org.example</a> - package org.example</dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -233,10 +265,8 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </a>
 <h2 class="title">S</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="org/example/Player.html#showHand(boolean)">showHand(boolean)</a></span> - Method in class org.example.<a href="org/example/Player.html" title="class in org.example">Player</a></dt>
-<dd>
-<div class="block">Displays the player's hand.</div>
-</dd>
+<dt><span class="memberNameLink"><a href="org/example/Game.html#showPlayerHand(org.example.Player,boolean)">showPlayerHand(Player, boolean)</a></span> - Method in class org.example.<a href="org/example/Game.html" title="class in org.example">Game</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="org/example/Deck.html#shuffle()">shuffle()</a></span> - Method in class org.example.<a href="org/example/Deck.html" title="class in org.example">Deck</a></dt>
 <dd>
 <div class="block">Shuffles the deck of cards using the

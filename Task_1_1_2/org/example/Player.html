@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -183,20 +183,34 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#clearHand()">clearHand</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Clears the player's hand</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="Card.html" title="class in org.example">Card</a>&gt;</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHand()">getHand</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns the list of cards in the player's hand.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getHandValue()">getHandValue</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Calculates and returns the total value of the player's hand.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getName()">getName</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Returns the name of the player.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#hasBlackjack()">hasBlackjack</a></span>()</code></th>
 <td class="colLast">
@@ -205,21 +219,21 @@ extends java.lang.Object</pre>
  and the hand value equals 21.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>boolean</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isBusted()">isBusted</a></span>()</code></th>
 <td class="colLast">
 <div class="block">Checks if the player's hand value exceeds 21, indicating a bust.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showHand(boolean)">showHand</a></span>&#8203;(boolean&nbsp;showAll)</code></th>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#isDealer()">isDealer</a></span>()</code></th>
 <td class="colLast">
-<div class="block">Displays the player's hand.</div>
+<div class="block">Returns player is dealer.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#takeCard(org.example.Card)">takeCard</a></span>&#8203;(<a href="Card.html" title="class in org.example">Card</a>&nbsp;card)</code></th>
 <td class="colLast">
@@ -336,24 +350,24 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a id="showHand(boolean)">
+<a id="getHand()">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>showHand</h4>
-<pre class="methodSignature">public&nbsp;void&nbsp;showHand&#8203;(boolean&nbsp;showAll)</pre>
-<div class="block">Displays the player's hand.</div>
+<h4>getHand</h4>
+<pre class="methodSignature">public&nbsp;java.util.List&lt;<a href="Card.html" title="class in org.example">Card</a>&gt;&nbsp;getHand()</pre>
+<div class="block">Returns the list of cards in the player's hand.</div>
 <dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>showAll</code> - <code>true</code> if all cards should be shown.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a <code>List&lt;Card&gt;</code> representing the player's hand</dd>
 </dl>
 </li>
 </ul>
 <a id="getName()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getName</h4>
 <pre class="methodSignature">public&nbsp;java.lang.String&nbsp;getName()</pre>
@@ -362,6 +376,30 @@ extends java.lang.Object</pre>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the player's name as a <code>String</code></dd>
 </dl>
+</li>
+</ul>
+<a id="isDealer()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isDealer</h4>
+<pre class="methodSignature">public&nbsp;boolean&nbsp;isDealer()</pre>
+<div class="block">Returns player is dealer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the player is a dealer as a <code>Boolean</code></dd>
+</dl>
+</li>
+</ul>
+<a id="clearHand()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>clearHand</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;clearHand()</pre>
+<div class="block">Clears the player's hand</div>
 </li>
 </ul>
 </li>
