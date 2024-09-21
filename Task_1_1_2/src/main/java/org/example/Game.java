@@ -145,7 +145,7 @@ public class Game {
      */
     private void dealerTurn() {
         System.out.println("\nDealer's turn.");
-        showPlayerHand(dealer, false);
+        showPlayerHand(dealer, true);
 
         while (dealer.getHandValue() < 17) {
             System.out.println("Dealer hits.");
@@ -227,20 +227,26 @@ public class Game {
     }
 
     public void showPlayerHand(Player player, boolean showAll) {
-        System.out.println(player.getName() + "'s cards:");
+        StringBuilder handString = new StringBuilder(player.getName() + "'s cards: [");
         List<Card> hand = player.getHand();
 
         for (int i = 0; i < hand.size(); i++) {
-            // For the dealer, we can decide to hide the second card if showAll is false
             if (!showAll && i == 1 && player.isDealer()) {
-                hand.get(i).close();  // Close the second card if needed
+                handString.append("<Hidden card>");
             } else {
-                hand.get(i).open();  // Open all other cards
+                handString.append(hand.get(i).getSuit())
+                        .append(" (").append(hand.get(i).getValue()).append(")");
             }
-            System.out.println(hand.get(i));  // The card's toString() will handle the display
+
+            if (i != hand.size() - 1) {
+                handString.append(", ");
+            }
         }
 
-        // If the player is not the dealer, show their hand value
+        handString.append("]");
+
+        System.out.println(handString);
+
         if (!player.isDealer()) {
             System.out.println("Your hand value: " + player.getHandValue());
         }
