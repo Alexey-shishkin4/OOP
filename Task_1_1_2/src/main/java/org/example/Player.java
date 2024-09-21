@@ -102,7 +102,20 @@ public class Player {
         return name;
     }
 
+    /**
+     * Returns player is dealer.
+     *
+     * @return the player is a dealer as a {@code Boolean}
+     */
     public boolean isDealer() {
         return isDealer;
+    }
+
+    /**
+     * Clears the player's hand
+     *
+     */
+    public void clearHand() {
+        hand.clear();
     }
 }

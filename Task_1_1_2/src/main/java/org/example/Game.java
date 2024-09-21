@@ -87,8 +87,8 @@ public class Game {
      * Resets the hands of both the player and the dealer for the next round.
      */
     private void resetHands() {
-        player = new Player("Player", false);
-        dealer = new Player("Dealer", true);
+        player.clearHand();  // Clear the player's hand
+        dealer.clearHand();  // Clear the dealer's hand
     }
 
     /**
