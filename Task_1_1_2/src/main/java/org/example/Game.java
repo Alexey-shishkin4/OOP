@@ -47,13 +47,14 @@ public class Game {
             showPlayerHand(player, true);
             showPlayerHand(dealer, false);
 
+            // Check for initial blackjack
             if (player.hasBlackjack()) {
                 System.out.println(player.getName() + " has Blackjack! You win!");
                 scores[0]++;
                 System.out.println("Current Score -> Player: "
                         + scores[0] + " | Dealer: " + scores[1]);
                 repeat = gameContinue();
-                continue;
+                continue;  // Move to next round
             }
 
             // Player's turn
@@ -64,16 +65,18 @@ public class Game {
                     System.out.println("Current Score -> Player: "
                             + scores[0] + " | Dealer: " + scores[1]);
                     repeat = gameContinue();
-                    break;
+                    continue;
                 }
             }
 
+            // If the player is not busted, play dealer's turn
             if (!player.isBusted()) {
                 dealerTurn();
             }
 
             // Determine the round winner
-            determineWinner(scores);
+            String result = determineWinnerResult();
+            handleWinnerResult(result, scores);
 
             repeat = gameContinue();
         }
@@ -82,6 +85,7 @@ public class Game {
                 + scores[0] + " | Dealer: " + scores[1]);
         System.out.println("Thank you for playing!");
     }
+
 
     /**
      * Resets the hands of both the player and the dealer for the next round.
@@ -141,7 +145,7 @@ public class Game {
      */
     private void dealerTurn() {
         System.out.println("\nDealer's turn.");
-        showPlayerHand(dealer, true);
+        showPlayerHand(dealer, false);
 
         while (dealer.getHandValue() < 17) {
             System.out.println("Dealer hits.");
@@ -154,42 +158,62 @@ public class Game {
         } else {
             System.out.println("Dealer stands.");
         }
+        System.out.println("Dealer hand value: " + dealer.getHandValue());
     }
 
     /**
-     * Compares the player's and dealer's hands to
-     * determine the winner of the round. Updates the scores accordingly.
+     * Compares the player's and dealer's hands to determine the winner of the round.
      *
-     * @param scores an array storing the current scores for both the player and dealer
+     * @return A string indicating the result of the round: "PLAYER_WIN", "DEALER_WIN", "TIE", or "PLAYER_BUSTED", "DEALER_BUSTED"
      */
-    private void determineWinner(int[] scores) {
+    private String determineWinnerResult() {
         final int playerScore = player.getHandValue();
         final int dealerScore = dealer.getHandValue();
 
-        System.out.println("\nFinal hands:");
-        showPlayerHand(player, true);
-        showPlayerHand(dealer, true);
-        System.out.println(player.getName() + " score: " + playerScore);
-        System.out.println(dealer.getName() + " score: " + dealerScore);
-
         if (player.isBusted()) {
-            System.out.println("You lose.");
-            scores[1]++;
+            return "PLAYER_BUSTED";
         } else if (dealer.isBusted()) {
-            System.out.println("You win!");
-            scores[0]++;
+            return "DEALER_BUSTED";
         } else if (playerScore > dealerScore) {
-            System.out.println("You win!");
-            scores[0]++;
+            return "PLAYER_WIN";
         } else if (playerScore < dealerScore) {
-            System.out.println("Dealer wins.");
-            scores[1]++;
+            return "DEALER_WIN";
         } else {
-            System.out.println("It's a tie!");
+            return "TIE";
         }
+    }
 
-        System.out.println("Current Score -> Player: "
-                + scores[0] + " | Dealer: " + scores[1]);
+    /**
+     * Handles the winner result based on the string result returned from determineWinnerResult.
+     * Updates scores and prints the result.
+     *
+     * @param result the result of the round ("PLAYER_WIN", "DEALER_WIN", "TIE", etc.)
+     * @param scores the current scores for player and dealer
+     */
+    private void handleWinnerResult(String result, int[] scores) {
+        switch (result) {
+            case "PLAYER_BUSTED":
+                System.out.println("You lose. You busted.");
+                scores[1]++;
+                break;
+            case "DEALER_BUSTED":
+                scores[0]++;
+                break;
+            case "PLAYER_WIN":
+                System.out.println("You win!");
+                scores[0]++;
+                break;
+            case "DEALER_WIN":
+                System.out.println("Dealer wins.");
+                scores[1]++;
+                break;
+            case "TIE":
+                System.out.println("It's a tie!");
+                break;
+            default:
+                System.out.println("Unknown result.");
+        }
+        System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
     }
 
     /**
