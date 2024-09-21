@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.List;
+
 import java.util.Scanner;
 
 /**
@@ -42,8 +44,8 @@ public class Game {
             dealer.takeCard(deck.dealCard());
 
             System.out.println("Welcome to blackjack");
-            player.showHand(true);
-            dealer.showHand(false);
+            showPlayerHand(player, true);
+            showPlayerHand(dealer, false);
 
             if (player.hasBlackjack()) {
                 System.out.println(player.getName() + " has Blackjack! You win!");
@@ -122,7 +124,7 @@ public class Game {
 
         if (action.equalsIgnoreCase("h")) {
             player.takeCard(deck.dealCard());
-            player.showHand(true);
+            showPlayerHand(player, true);
             return true;
         } else if (action.equalsIgnoreCase("s")) {
             return false;
@@ -139,12 +141,12 @@ public class Game {
      */
     private void dealerTurn() {
         System.out.println("\nDealer's turn.");
-        dealer.showHand(true);
+        showPlayerHand(dealer, true);
 
         while (dealer.getHandValue() < 17) {
             System.out.println("Dealer hits.");
             dealer.takeCard(deck.dealCard());
-            dealer.showHand(true);
+            showPlayerHand(dealer, true);
         }
 
         if (dealer.isBusted()) {
@@ -165,8 +167,8 @@ public class Game {
         final int dealerScore = dealer.getHandValue();
 
         System.out.println("\nFinal hands:");
-        player.showHand(true);
-        dealer.showHand(true);
+        showPlayerHand(player, true);
+        showPlayerHand(dealer, true);
         System.out.println(player.getName() + " score: " + playerScore);
         System.out.println(dealer.getName() + " score: " + dealerScore);
 
@@ -198,5 +200,22 @@ public class Game {
     public static void main(String[] args) {
         Game game = new Game();
         game.play();
+    }
+
+    public void showPlayerHand(Player player, boolean showAll) {
+        System.out.println(player.getName() + "'s cards:");
+        List<Card> hand = player.getHand();
+
+        for (int i = 0; i < hand.size(); i++) {
+            if (!showAll && i == 1 && player.isDealer()) {
+                System.out.println("[Hidden]");
+            } else {
+                System.out.println(hand.get(i));
+            }
+        }
+
+        if (!player.isDealer()) {
+            System.out.println("Your hand value: " + player.getHandValue());
+        }
     }
 }

@@ -85,22 +85,12 @@ public class Player {
     }
 
     /**
-     * Displays the player's hand.
+     * Returns the list of cards in the player's hand.
      *
-     * @param showAll {@code true} if all cards should be shown.
+     * @return a {@code List<Card>} representing the player's hand
      */
-    public void showHand(boolean showAll) {
-        System.out.println(name + "'s cards:");
-        for (int i = 0; i < hand.size(); i++) {
-            if (!showAll && i == 1 && isDealer) {
-                System.out.println("[Hidden]");
-            } else {
-                System.out.println(hand.get(i));
-            }
-        }
-        if (!isDealer) {
-            System.out.println("Your hand value: " + getHandValue());
-        }
+    public List<Card> getHand() {
+        return hand;
     }
 
     /**
@@ -110,5 +100,9 @@ public class Player {
      */
     public String getName() {
         return name;
+    }
+
+    public boolean isDealer() {
+        return isDealer;
     }
 }
