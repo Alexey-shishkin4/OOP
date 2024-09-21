@@ -207,15 +207,19 @@ public class Game {
         List<Card> hand = player.getHand();
 
         for (int i = 0; i < hand.size(); i++) {
+            // For the dealer, we can decide to hide the second card if showAll is false
             if (!showAll && i == 1 && player.isDealer()) {
-                System.out.println("[Hidden]");
+                hand.get(i).close();  // Close the second card if needed
             } else {
-                System.out.println(hand.get(i));
+                hand.get(i).open();  // Open all other cards
             }
+            System.out.println(hand.get(i));  // The card's toString() will handle the display
         }
 
+        // If the player is not the dealer, show their hand value
         if (!player.isDealer()) {
             System.out.println("Your hand value: " + player.getHandValue());
         }
     }
+
 }
