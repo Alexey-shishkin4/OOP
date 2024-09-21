@@ -8,7 +8,7 @@ import java.util.Scanner;
  * The {@code Game} class implements the core logic of a blackjack game.
  */
 public class Game {
-    private Deck deck;
+    private final Deck deck;
     private Player player;
     private Player dealer;
 

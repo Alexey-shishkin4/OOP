@@ -13,6 +13,11 @@ import java.util.List;
 public class Deck {
     private List<Card> cards;
 
+    // Статические поля для мастей и рангов карт, одинаковые для всех колод
+    private static final String[] SUITS = {"Hearts", "Diamonds", "Clubs", "Spades"};
+    private static final String[] RANKS = {"2", "3", "4", "5", "6",
+            "7", "8", "9", "10", "J", "Q", "K", "A"};
+
     /**
      * Initializes a new deck of 52 cards. The deck consists of cards from 4 suits
      * ("Hearts", "Diamonds", "Clubs", "Spades") and 13 ranks (2-10, J, Q, K, A).
@@ -20,11 +25,10 @@ public class Deck {
      */
     public Deck() {
         cards = new ArrayList<>();
-        String[] suits = {"Hearts", "Diamonds", "Clubs", "Spades"};
-        String[] ranks = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"};
 
-        for (String suit : suits) {
-            for (String rank : ranks) {
+        // Используем статические массивы SUITS и RANKS для создания колоды
+        for (String suit : SUITS) {
+            for (String rank : RANKS) {
                 cards.add(new Card(rank, suit));
             }
         }
