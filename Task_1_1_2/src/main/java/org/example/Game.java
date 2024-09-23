@@ -12,6 +12,18 @@ public class Game {
     private Player player;
     private Player dealer;
 
+
+    /**
+     * Enum for game results
+     */
+    public enum GameResult {
+        PLAYER_BUSTED,
+        DEALER_BUSTED,
+        PLAYER_WIN,
+        DEALER_WIN,
+        TIE
+    }
+
     /**
      * Initializes a new {@code Game} object by creating a new deck and two players:
      * one for the player and one for the dealer.
@@ -75,7 +87,7 @@ public class Game {
             }
 
             // Determine the round winner
-            String result = determineWinnerResult();
+            GameResult result = determineWinnerResult();
             handleWinnerResult(result, scores);
 
             repeat = gameContinue();
@@ -166,22 +178,23 @@ public class Game {
      *
      * @return A string indicating the result of the round: "PLAYER_WIN", "DEALER_WIN", "TIE", or "PLAYER_BUSTED", "DEALER_BUSTED"
      */
-    public String determineWinnerResult() {
+    public GameResult determineWinnerResult() {
         final int playerScore = player.getHandValue();
         final int dealerScore = dealer.getHandValue();
 
         if (player.isBusted()) {
-            return "PLAYER_BUSTED";
+            return GameResult.PLAYER_BUSTED;
         } else if (dealer.isBusted()) {
-            return "DEALER_BUSTED";
+            return GameResult.DEALER_BUSTED;
         } else if (playerScore > dealerScore) {
-            return "PLAYER_WIN";
+            return GameResult.PLAYER_WIN;
         } else if (playerScore < dealerScore) {
-            return "DEALER_WIN";
+            return GameResult.DEALER_WIN;
         } else {
-            return "TIE";
+            return GameResult.TIE;
         }
     }
+
 
     /**
      * Handles the winner result based on the string result returned from determineWinnerResult.
@@ -190,31 +203,31 @@ public class Game {
      * @param result the result of the round ("PLAYER_WIN", "DEALER_WIN", "TIE", etc.)
      * @param scores the current scores for player and dealer
      */
-    private void handleWinnerResult(String result, int[] scores) {
+    private void handleWinnerResult(GameResult result, int[] scores) {
         switch (result) {
-            case "PLAYER_BUSTED":
+            case PLAYER_BUSTED:
                 System.out.println("You lose. You busted.");
                 scores[1]++;
                 break;
-            case "DEALER_BUSTED":
+            case DEALER_BUSTED:
+                System.out.println("Dealer busted! You win.");
                 scores[0]++;
                 break;
-            case "PLAYER_WIN":
+            case PLAYER_WIN:
                 System.out.println("You win!");
                 scores[0]++;
                 break;
-            case "DEALER_WIN":
+            case DEALER_WIN:
                 System.out.println("Dealer wins.");
                 scores[1]++;
                 break;
-            case "TIE":
+            case TIE:
                 System.out.println("It's a tie!");
                 break;
-            default:
-                System.out.println("Unknown result.");
         }
         System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
     }
+
 
     /**
      * The main method to run the blackjack game.
