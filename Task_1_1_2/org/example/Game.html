@@ -27,7 +27,7 @@
     catch(err) {
     }
 //-->
-var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10};
+var data = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":9,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -219,21 +219,39 @@ extends java.lang.Object</pre>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="Player.html" title="class in org.example">Player</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getDealer()">getDealer</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns dealer.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="Player.html" title="class in org.example">Player</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getPlayer()">getPlayer</a></span>()</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Returns player.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="ScoreBoard.html" title="class in org.example">ScoreBoard</a></code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#getScoreBoard()">getScoreBoard</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Returns scoreboard for tests.</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#handleWinnerResult(org.example.Game.GameResult)">handleWinnerResult</a></span>&#8203;(<a href="Game.GameResult.html" title="enum in org.example">Game.GameResult</a>&nbsp;result)</code></th>
+<td class="colLast">
+<div class="block">Handles the winner result based on the string result returned from determineWinnerResult.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#main(java.lang.String%5B%5D)">main</a></span>&#8203;(java.lang.String[]&nbsp;args)</code></th>
 <td class="colLast">
 <div class="block">The main method to run the blackjack game.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#play()">play</a></span>()</code></th>
 <td class="colLast">
@@ -243,11 +261,20 @@ extends java.lang.Object</pre>
  if they wish to continue playing or end the game.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>void</code></td>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#resetHands()">resetHands</a></span>()</code></th>
+<td class="colLast">
+<div class="block">Resets the hands of both the player and the dealer for the next round.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#showPlayerHand(org.example.Player,boolean)">showPlayerHand</a></span>&#8203;(<a href="Player.html" title="class in org.example">Player</a>&nbsp;player,
               boolean&nbsp;showAll)</code></th>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Shows player hand.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -309,6 +336,16 @@ extends java.lang.Object</pre>
  and the dealer over multiple rounds.</div>
 </li>
 </ul>
+<a id="resetHands()">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resetHands</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;resetHands()</pre>
+<div class="block">Resets the hands of both the player and the dealer for the next round.</div>
+</li>
+</ul>
 <a id="dealerTurn()">
 <!--   -->
 </a>
@@ -335,6 +372,21 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
+<a id="handleWinnerResult(org.example.Game.GameResult)">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>handleWinnerResult</h4>
+<pre class="methodSignature">public&nbsp;void&nbsp;handleWinnerResult&#8203;(<a href="Game.GameResult.html" title="enum in org.example">Game.GameResult</a>&nbsp;result)</pre>
+<div class="block">Handles the winner result based on the string result returned from determineWinnerResult.
+ Updates scores and prints the result.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>result</code> - the result of the round ("PLAYER_WIN", "DEALER_WIN", "TIE", etc.)</dd>
+</dl>
+</li>
+</ul>
 <a id="main(java.lang.String[])">
 <!--   -->
 </a>
@@ -357,6 +409,12 @@ extends java.lang.Object</pre>
 <h4>showPlayerHand</h4>
 <pre class="methodSignature">public&nbsp;void&nbsp;showPlayerHand&#8203;(<a href="Player.html" title="class in org.example">Player</a>&nbsp;player,
                            boolean&nbsp;showAll)</pre>
+<div class="block">Shows player hand.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>player</code> - the player class</dd>
+<dd><code>showAll</code> - boolean</dd>
+</dl>
 </li>
 </ul>
 <a id="getPlayer()">
@@ -366,15 +424,39 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>getPlayer</h4>
 <pre class="methodSignature">public&nbsp;<a href="Player.html" title="class in org.example">Player</a>&nbsp;getPlayer()</pre>
+<div class="block">Returns player.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>player.</dd>
+</dl>
 </li>
 </ul>
 <a id="getDealer()">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getDealer</h4>
 <pre class="methodSignature">public&nbsp;<a href="Player.html" title="class in org.example">Player</a>&nbsp;getDealer()</pre>
+<div class="block">Returns dealer.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>dealer.</dd>
+</dl>
+</li>
+</ul>
+<a id="getScoreBoard()">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getScoreBoard</h4>
+<pre class="methodSignature">public&nbsp;<a href="ScoreBoard.html" title="class in org.example">ScoreBoard</a>&nbsp;getScoreBoard()</pre>
+<div class="block">Returns scoreboard for tests.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>scoreBoard.</dd>
+</dl>
 </li>
 </ul>
 </li>
