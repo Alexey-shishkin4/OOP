@@ -1,7 +1,6 @@
 package org.example;
 
 import java.util.List;
-
 import java.util.Scanner;
 
 /**
@@ -15,7 +14,8 @@ public class Game {
 
 
     /**
-     * Enum for game results
+     * Enum for game results.
+     *
      */
     public enum GameResult {
         PLAYER_BUSTED,

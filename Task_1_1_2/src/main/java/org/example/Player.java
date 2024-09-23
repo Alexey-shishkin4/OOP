@@ -112,7 +112,7 @@ public class Player {
     }
 
     /**
-     * Clears the player's hand
+     * Clears the player's hand.
      *
      */
     public void clearHand() {
