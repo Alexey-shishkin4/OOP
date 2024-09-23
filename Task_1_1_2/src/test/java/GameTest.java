@@ -67,7 +67,8 @@ public class GameTest {
         dealer.takeCard(new Card("7", "Hearts"));
 
         Game.GameResult result = game.determineWinnerResult();
-        assertEquals(Game.GameResult.PLAYER_WIN, result, "Player should win with higher score");
+        assertEquals(Game.GameResult.PLAYER_WIN, result,
+                "Player should win with higher score");
     }
 
     @Test
@@ -82,7 +83,8 @@ public class GameTest {
         dealer.takeCard(new Card("8", "Hearts"));
 
         Game.GameResult result = game.determineWinnerResult();
-        assertEquals(Game.GameResult.TIE, result, "Player and dealer should have the same score and tie");
+        assertEquals(Game.GameResult.TIE, result,
+                "Player and dealer should have the same score and tie");
     }
 
 
@@ -98,15 +100,19 @@ public class GameTest {
         dealer.takeCard(new Card("7", "Hearts"));
 
         // Проверяем, что руки не пустые
-        assertFalse(player.getHand().isEmpty(), "Player's hand should not be empty before reset");
-        assertFalse(dealer.getHand().isEmpty(), "Dealer's hand should not be empty before reset");
+        assertFalse(player.getHand().isEmpty(),
+                "Player's hand should not be empty before reset");
+        assertFalse(dealer.getHand().isEmpty(),
+                "Dealer's hand should not be empty before reset");
 
         // Вызываем метод resetHands()
         game.resetHands();
 
         // Проверяем, что руки были очищены
-        assertTrue(player.getHand().isEmpty(), "Player's hand should be empty after reset");
-        assertTrue(dealer.getHand().isEmpty(), "Dealer's hand should be empty after reset");
+        assertTrue(player.getHand().isEmpty(),
+                "Player's hand should be empty after reset");
+        assertTrue(dealer.getHand().isEmpty(),
+                "Dealer's hand should be empty after reset");
     }
 
     @Test
@@ -115,9 +121,11 @@ public class GameTest {
         game.handleWinnerResult(Game.GameResult.PLAYER_WIN);
 
         // Проверка, что счет игрока увеличился
-        assertEquals(1, game.getScoreBoard().getPlayerScore(), "Player's score should increment when player wins");
+        assertEquals(1, game.getScoreBoard().getPlayerScore(),
+                "Player's score should increment when player wins");
 
         // Проверка, что счет дилера не изменился
-        assertEquals(0, game.getScoreBoard().getDealerScore(), "Dealer's score should remain 0");
+        assertEquals(0, game.getScoreBoard().getDealerScore(),
+                "Dealer's score should remain 0");
     }
 }

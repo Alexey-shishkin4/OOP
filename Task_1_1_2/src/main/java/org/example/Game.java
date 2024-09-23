@@ -151,25 +151,27 @@ public class Game {
     public void dealerTurn() {
         System.out.println("\nDealer's turn.");
         showPlayerHand(dealer, true);
+        System.out.println("\tDealer hand value: " + dealer.getHandValue());
 
         while (dealer.getHandValue() < 17) {
-            System.out.println("Dealer hits.");
+            System.out.println("\tDealer hits.");
             dealer.takeCard(deck.dealCard());
             showPlayerHand(dealer, true);
+            System.out.println("\tDealer hand value: " + dealer.getHandValue());
         }
 
         if (dealer.isBusted()) {
-            System.out.println("Dealer busted! You win.");
+            System.out.println("\tDealer busted! You win.");
         } else {
-            System.out.println("Dealer stands.");
+            System.out.println("\tDealer stands.");
         }
-        System.out.println("Dealer hand value: " + dealer.getHandValue());
+        System.out.println("\tFinal Dealer hand value: " + dealer.getHandValue());
     }
 
     /**
      * Compares the player's and dealer's hands to determine the winner of the round.
      *
-     * @return A string indicating the result of the round: "PLAYER_WIN", "DEALER_WIN", "TIE", or "PLAYER_BUSTED", "DEALER_BUSTED"
+     * @return A string indicating the result of the round.
      */
     public GameResult determineWinnerResult() {
         final int playerScore = player.getHandValue();
