@@ -64,20 +64,6 @@ public class Card {
     }
 
     /**
-     * Sets the card to be closed (hidden).
-     */
-    public void close() {
-        this.closed = true;
-    }
-
-    /**
-     * Sets the card to be open (visible).
-     */
-    public void open() {
-        this.closed = false;
-    }
-
-    /**
      * Returns a string representation of the card,
      * including both its rank and suit.
      * For example, "A of Hearts" or "10 of Spades".
