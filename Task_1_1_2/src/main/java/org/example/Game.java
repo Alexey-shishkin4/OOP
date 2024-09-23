@@ -45,13 +45,11 @@ public class Game {
      * and the dealer over multiple rounds.
      */
     public void play() {
-        int[] scores = {0, 0};  // Scores for player and dealer
         boolean repeat = true;
 
         while (repeat) {
             resetHands();
 
-            // Initial card dealing
             player.takeCard(deck.dealCard());
             player.takeCard(deck.dealCard());
             dealer.takeCard(deck.dealCard());
@@ -61,52 +59,45 @@ public class Game {
             showPlayerHand(player, true);
             showPlayerHand(dealer, false);
 
-            // Check for initial blackjack
             if (player.hasBlackjack()) {
                 System.out.println(player.getName() + " has Blackjack! You win!");
-                scores[0]++;
-                System.out.println("Current Score -> Player: "
-                        + scores[0] + " | Dealer: " + scores[1]);
+                scoreBoard.incrementPlayerScore();  // Increment player's score
+                System.out.println("Current Score -> " + scoreBoard);
                 repeat = gameContinue();
-                continue;  // Move to next round
+                continue;
             }
 
             // Player's turn
             while (playerTurn()) {
                 if (player.isBusted()) {
                     System.out.println(player.getName() + " busted! You lose.");
-                    scores[1]++;
-                    System.out.println("Current Score -> Player: "
-                            + scores[0] + " | Dealer: " + scores[1]);
+                    scoreBoard.incrementDealerScore();  // Increment dealer's score
+                    System.out.println("Current Score -> " + scoreBoard);
                     repeat = gameContinue();
                     continue;
                 }
             }
 
-            // If the player is not busted, play dealer's turn
             if (!player.isBusted()) {
                 dealerTurn();
             }
 
-            // Determine the round winner
             GameResult result = determineWinnerResult();
-            handleWinnerResult(result, scores);
+            handleWinnerResult(result);
 
             repeat = gameContinue();
         }
 
-        System.out.println("Final Score -> Player: "
-                + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Final Score -> " + scoreBoard);
         System.out.println("Thank you for playing!");
     }
-
 
     /**
      * Resets the hands of both the player and the dealer for the next round.
      */
-    private void resetHands() {
-        player.clearHand();  // Clear the player's hand
-        dealer.clearHand();  // Clear the dealer's hand
+    public void resetHands() {
+        player.clearHand();
+        dealer.clearHand();
     }
 
     /**
@@ -203,9 +194,8 @@ public class Game {
      * Updates scores and prints the result.
      *
      * @param result the result of the round ("PLAYER_WIN", "DEALER_WIN", "TIE", etc.)
-     * @param scores the current scores for player and dealer
      */
-    private void handleWinnerResult(GameResult result, int[] scores) {
+    public void handleWinnerResult(GameResult result) {
         switch (result) {
             case PLAYER_BUSTED:
                 System.out.println("You lose. You busted.");
@@ -241,6 +231,12 @@ public class Game {
         game.play();
     }
 
+    /**
+     * Shows player hand.
+     *
+     * @param player the player class
+     * @param showAll boolean
+     */
     public void showPlayerHand(Player player, boolean showAll) {
         StringBuilder handString = new StringBuilder(player.getName() + "'s cards: [");
         List<Card> hand = player.getHand();
@@ -267,12 +263,31 @@ public class Game {
         }
     }
 
+    /**
+     * Returns player.
+     *
+     * @return player.
+     */
     public Player getPlayer() {
         return player;
     }
 
+    /**
+     * Returns dealer.
+     *
+     * @return dealer.
+     */
     public Player getDealer() {
         return dealer;
+    }
+
+    /**
+     * Returns scoreboard for tests.
+     *
+     * @return scoreBoard.
+     */
+    public ScoreBoard getScoreBoard() {
+        return scoreBoard;
     }
 
 }

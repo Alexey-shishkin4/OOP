@@ -2,6 +2,7 @@ package org.example;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -82,5 +83,41 @@ public class GameTest {
 
         Game.GameResult result = game.determineWinnerResult();
         assertEquals(Game.GameResult.TIE, result, "Player and dealer should have the same score and tie");
+    }
+
+
+    @Test
+    public void testResetHands() {
+        Player player = game.getPlayer();
+        Player dealer = game.getDealer();
+
+        // Добавляем карты в руки игрока и дилера
+        player.takeCard(new Card("10", "Hearts"));
+        player.takeCard(new Card("7", "Diamonds"));
+        dealer.takeCard(new Card("9", "Clubs"));
+        dealer.takeCard(new Card("7", "Hearts"));
+
+        // Проверяем, что руки не пустые
+        assertFalse(player.getHand().isEmpty(), "Player's hand should not be empty before reset");
+        assertFalse(dealer.getHand().isEmpty(), "Dealer's hand should not be empty before reset");
+
+        // Вызываем метод resetHands()
+        game.resetHands();
+
+        // Проверяем, что руки были очищены
+        assertTrue(player.getHand().isEmpty(), "Player's hand should be empty after reset");
+        assertTrue(dealer.getHand().isEmpty(), "Dealer's hand should be empty after reset");
+    }
+
+    @Test
+    public void testHandlePlayerWin() {
+        // Проверяем, что результат "PLAYER_WIN" увеличивает счет игрока
+        game.handleWinnerResult(Game.GameResult.PLAYER_WIN);
+
+        // Проверка, что счет игрока увеличился
+        assertEquals(1, game.getScoreBoard().getPlayerScore(), "Player's score should increment when player wins");
+
+        // Проверка, что счет дилера не изменился
+        assertEquals(0, game.getScoreBoard().getDealerScore(), "Dealer's score should remain 0");
     }
 }
