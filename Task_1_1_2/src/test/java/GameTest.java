@@ -65,8 +65,8 @@ public class GameTest {
         dealer.takeCard(new Card("9", "Clubs"));
         dealer.takeCard(new Card("7", "Hearts"));
 
-        String result = game.determineWinnerResult();
-        assertEquals("PLAYER_WIN", result, "Player should win with higher score");
+        Game.GameResult result = game.determineWinnerResult();
+        assertEquals(Game.GameResult.PLAYER_WIN, result, "Player should win with higher score");
     }
 
     @Test
@@ -80,7 +80,7 @@ public class GameTest {
         dealer.takeCard(new Card("10", "Clubs"));
         dealer.takeCard(new Card("8", "Hearts"));
 
-        String result = game.determineWinnerResult();
-        assertEquals("TIE", result, "Player and dealer should have the same score and tie");
+        Game.GameResult result = game.determineWinnerResult();
+        assertEquals(Game.GameResult.TIE, result, "Player and dealer should have the same score and tie");
     }
 }
