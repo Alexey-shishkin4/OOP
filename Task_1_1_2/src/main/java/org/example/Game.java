@@ -11,6 +11,7 @@ public class Game {
     private final Deck deck;
     private Player player;
     private Player dealer;
+    private ScoreBoard scoreBoard;
 
 
     /**
@@ -32,6 +33,7 @@ public class Game {
         deck = new Deck();
         player = new Player("Player", false);
         dealer = new Player("Dealer", true);
+        scoreBoard = new ScoreBoard();
     }
 
     /**
@@ -207,25 +209,25 @@ public class Game {
         switch (result) {
             case PLAYER_BUSTED:
                 System.out.println("You lose. You busted.");
-                scores[1]++;
+                scoreBoard.incrementDealerScore();  // Dealer wins
                 break;
             case DEALER_BUSTED:
                 System.out.println("Dealer busted! You win.");
-                scores[0]++;
+                scoreBoard.incrementPlayerScore();  // Player wins
                 break;
             case PLAYER_WIN:
                 System.out.println("You win!");
-                scores[0]++;
+                scoreBoard.incrementPlayerScore();
                 break;
             case DEALER_WIN:
                 System.out.println("Dealer wins.");
-                scores[1]++;
+                scoreBoard.incrementDealerScore();
                 break;
             case TIE:
                 System.out.println("It's a tie!");
                 break;
         }
-        System.out.println("Current Score -> Player: " + scores[0] + " | Dealer: " + scores[1]);
+        System.out.println("Current Score -> " + scoreBoard);  // Use ScoreBoard's toString()
     }
 
 
