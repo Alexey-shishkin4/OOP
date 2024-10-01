@@ -74,12 +74,14 @@ public class Game {
                     scoreBoard.incrementDealerScore();  // Increment dealer's score
                     System.out.println("Current Score -> " + scoreBoard);
                     repeat = gameContinue();
-                    continue;
+                    break;
                 }
             }
 
             if (!player.isBusted()) {
                 dealerTurn();
+            } else {
+                continue;
             }
 
             GameResult result = determineWinnerResult();
