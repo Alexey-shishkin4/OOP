@@ -129,4 +129,26 @@ public class GameTest {
         assertEquals(0, game.getScoreBoard().getDealerScore(),
                 "Dealer's score should remain 0");
     }
+
+    @Test
+    public void testDealerWinUpdatesScore() {
+        game.handleWinnerResult(Game.GameResult.DEALER_WIN);
+
+        assertEquals(1, game.getScoreBoard().getDealerScore(),
+                "Dealer's score should increment when dealer wins");
+
+        assertEquals(0, game.getScoreBoard().getPlayerScore(),
+                "Player's score should remain 0");
+    }
+
+    @Test
+    public void testPlayerAndDealerTieScoreUpdates() {
+        game.handleWinnerResult(Game.GameResult.TIE);
+
+        assertEquals(0, game.getScoreBoard().getPlayerScore(),
+                "Player's score should remain unchanged in case of a tie");
+        
+        assertEquals(0, game.getScoreBoard().getDealerScore(),
+                "Dealer's score should remain unchanged in case of a tie");
+    }
 }
