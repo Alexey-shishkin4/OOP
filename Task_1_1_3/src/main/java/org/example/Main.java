@@ -5,7 +5,8 @@ import java.util.Map;
 
 
 /**
- * Основной класс с методом main для демонстрации работы выражений.
+ * Основной класс с методом main для демонстрации
+ * работы выражений.
  */
 public class Main {
     public static void main(String[] args) {
