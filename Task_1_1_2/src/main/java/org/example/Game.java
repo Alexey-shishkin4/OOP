@@ -263,7 +263,7 @@ public class Game {
         System.out.println(handString);
 
         if (!player.isDealer()) {
-            System.out.println("Your hand value: " + player.getHandValue());
+            System.out.println("\tYour hand value: " + player.getHandValue());
         }
     }
 

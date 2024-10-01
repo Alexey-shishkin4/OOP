@@ -147,7 +147,7 @@ public class GameTest {
 
         assertEquals(0, game.getScoreBoard().getPlayerScore(),
                 "Player's score should remain unchanged in case of a tie");
-        
+
         assertEquals(0, game.getScoreBoard().getDealerScore(),
                 "Dealer's score should remain unchanged in case of a tie");
     }
