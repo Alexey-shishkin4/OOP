@@ -349,10 +349,10 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
      */
     @Override
     public int hashCode() {
-        int result = 1;
+        int result = 0;
         for (Entry<K, V> entry : this) {
-            result = 31 * result + (entry.key == null ? 0 : entry.key.hashCode());
-            result = 31 * result + (entry.value == null ? 0 : entry.value.hashCode());
+            result += (entry.key == null ? 0 : entry.key.hashCode()) ^
+                    (entry.value == null ? 0 : entry.value.hashCode());
         }
         return result;
     }
