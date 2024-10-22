@@ -33,7 +33,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
     /**
      * Inner class representing an entry in the hash table (a key-value pair).
      */
-    public  static class Entry<K, V> {
+    public static class Entry<K, V> {
         K key;
         V value;
 
