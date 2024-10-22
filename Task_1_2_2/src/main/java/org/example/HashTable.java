@@ -162,7 +162,11 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
      * @param value the new value to associate with the key
      */
     public void update(K key, V value) {
-        put(key, value);
+        if (containsKey(key)) {
+            put(key, value); // Обновляем значение для ключа
+        } else {
+            throw new IllegalArgumentException("Key not found in the table: " + key);
+        }
     }
 
     /**
