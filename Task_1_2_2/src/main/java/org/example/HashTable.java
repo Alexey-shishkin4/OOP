@@ -157,6 +157,7 @@ public class HashTable<K, V> implements Iterable<HashTable.Entry<K, V>> {
 
     /**
      * Updates the value for the specified key if it exists in the hash table.
+     * Else trows IllegalArgumentException
      *
      * @param key the key to update
      * @param value the new value to associate with the key
