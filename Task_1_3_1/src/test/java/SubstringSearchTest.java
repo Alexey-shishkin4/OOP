@@ -72,6 +72,27 @@ class SubstringSearchTest {
         assertEquals(List.of(40000L), occurrences);
     }
 
+    @Test
+    void testFindSubstringInEmptyFile() throws IOException {
+        writeToFile(testFile, "");
+        List<Long> occurrences = SubstringSearch.find(testFile.getAbsolutePath(), "any");
+        assertEquals(List.of(), occurrences, "Expected no matches in an empty file");
+    }
+
+    @Test
+    void testFindSingleCharacterSubstring() throws IOException {
+        writeToFile(testFile, "aaaaaa");
+        List<Long> occurrences = SubstringSearch.find(testFile.getAbsolutePath(), "a");
+        assertEquals(List.of(0L, 1L, 2L, 3L, 4L, 5L), occurrences, "Expected occurrences at each position");
+    }
+
+    @Test
+    void testFindSubstringLongerThanText() throws IOException {
+        writeToFile(testFile, "short");
+        List<Long> occurrences = SubstringSearch.find(testFile.getAbsolutePath(), "longsubstring");
+        assertEquals(List.of(), occurrences, "Expected no matches when the substring is longer than the text");
+    }
+
     /**
      * Вспомогательный метод для записи текста в файл.
      */

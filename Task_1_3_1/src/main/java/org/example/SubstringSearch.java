@@ -54,7 +54,7 @@ public class SubstringSearch {
     }
 
     /**
-     * Custom implementation of the indexOf method, based on the Knuth-Morris-Pratt (KMP) algorithm.
+     * Custom implementation of the indexOf method.
      *
      * @param text the text in which to search
      * @param pattern the substring to search for
