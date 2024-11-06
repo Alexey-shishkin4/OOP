@@ -1,13 +1,14 @@
-import org.example.SubstringSearch;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.io.TempDir;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
+
+import org.example.SubstringSearch;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,7 +34,8 @@ class SubstringSearchMemoryTest {
 
     @Test
     void testFindSubstringInLargeFile() throws IOException {
-        List<Long> occurrences = SubstringSearch.find(largeTestFile.getAbsolutePath(), "needle");
+        List<Long> occurrences = SubstringSearch.find(largeTestFile.getAbsolutePath(),
+                "needle");
         assertEquals(List.of(1024L * 1024 * 1024L), occurrences,
                 "Expected one occurrence of 'needle' at the end of the file");
     }
