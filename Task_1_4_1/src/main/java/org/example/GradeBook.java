@@ -166,12 +166,16 @@ public class GradeBook {
      * @return Числовое значение оценки или -1, если оценка не числовая.
      */
     public int convertGradeToNumber(String grade) {
-        return switch (grade) {
-            case "отлично" -> 5;
-            case "хорошо" -> 4;
-            case "удовлетворительно" -> 3;
-            default -> -1;
-        };
+        switch (grade) {
+            case "отлично":
+                return 5;
+            case "хорошо":
+                return 4;
+            case "удовлетворительно":
+                return 3;
+            default:
+                return -1;
+        }
     }
 
     /**
