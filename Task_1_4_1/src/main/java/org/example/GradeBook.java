@@ -202,27 +202,4 @@ public class GradeBook {
     public void printGrades() {
         grades.forEach(System.out::println);
     }
-
-    /**
-     * основной метод.
-     *
-     * @param args аргументы.
-     */
-    public static void main(String[] args) {
-        GradeBook gradeBook = new GradeBook();
-
-        gradeBook.addGrade("Math", 1, "Экзамен", "отлично");
-        gradeBook.addGrade("Physics", 1, "Экзамен", "хорошо");
-        gradeBook.addGrade("Programming", 2, "Дифференцированный зачет",
-                "отлично");
-        gradeBook.addGrade("English", 2, "Экзамен", "удовлетворительно");
-
-        System.out.println("Средний балл: " + gradeBook.calculateAverageGrade());
-
-        System.out.println("Перевод на бюджет: " + gradeBook.canTransferToBudget());
-
-        System.out.println("Получить красный диплом: " + gradeBook.canGetRedDiploma());
-
-        System.out.println("Получить повышенную стипендию: " + gradeBook.canGetIncreasedScholarship());
-    }
 }
