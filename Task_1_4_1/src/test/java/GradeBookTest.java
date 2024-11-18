@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 
 class GradeBookTest {
-
     private GradeBook gradeBook;
 
     @BeforeEach
