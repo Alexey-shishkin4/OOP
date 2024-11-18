@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Класс электронной зачетной книжки студента.
@@ -9,14 +10,77 @@ import java.util.*;
  * получения красного диплома и повышенной стипендии.
  */
 public class GradeBook {
+    private final List<Grade> grades = new ArrayList<>();
+    private boolean isOnPaidForm = true;
+
+    /**
+     * Перечисление для типов контроля.
+     */
+    public enum ControlType {
+        EXAM("Экзамен"),
+        DIFFERENTIATED_CREDIT("Дифференцированный зачет"),
+        COURSEWORK("Курсовая работа"),
+        THESIS("Квалификационная работа");
+
+        private final String description;
+
+        ControlType(String description) {
+            this.description = description;
+        }
+
+        /**
+         * Возвращает описание.
+         *
+         * @return Описание.
+         */
+        public String getDescription() {
+            return description;
+        }
+    }
+
+    /**
+     * Перечисление для оценок.
+     */
+    public enum GradeValue {
+        EXCELLENT("отлично", 5),
+        GOOD("хорошо", 4),
+        SATISFACTORY("удовлетворительно", 3);
+
+        private final String description;
+        private final int numericValue;
+
+        GradeValue(String description, int numericValue) {
+            this.description = description;
+            this.numericValue = numericValue;
+        }
+
+        /**
+         * Возвращает описание.
+         *
+         * @return Описание.
+         */
+        public String getDescription() {
+            return description;
+        }
+
+        /**
+         * Возвращает численное значение.
+         *
+         * @return int.
+         */
+        public int getNumericValue() {
+            return numericValue;
+        }
+    }
+
     /**
      * Класс Grade представляет информацию об одной оценке студента.
      */
     public static class Grade {
         private final String subject;
         private final int semester;
-        private final String type;
-        private final String grade;
+        private final ControlType type;
+        private final GradeValue grade;
 
         /**
          * Конструктор для создания экземпляра оценки.
@@ -26,7 +90,7 @@ public class GradeBook {
          * @param type     Тип контроля (экзамен, зачет, дифференцированный зачет и т.д.).
          * @param grade    Оценка (например, "отлично", "хорошо", "удовлетворительно").
          */
-        public Grade(String subject, int semester, String type, String grade) {
+        public Grade(String subject, int semester, ControlType type, GradeValue grade) {
             this.subject = subject;
             this.semester = semester;
             this.type = type;
@@ -34,11 +98,20 @@ public class GradeBook {
         }
 
         /**
+         * Возвращает объект.
+         *
+         * @return Объект.
+         */
+        public String getSubject() {
+            return subject;
+        }
+
+        /**
          * Возвращает оценку.
          *
          * @return Строка, представляющая оценку.
          */
-        public String getGrade() {
+        public GradeValue getGrade() {
             return grade;
         }
 
@@ -50,138 +123,100 @@ public class GradeBook {
         public int getSemester() {
             return semester;
         }
+
         /**
          * Возвращает тип.
          *
          * @return Тип.
          */
-        public String getType() {
+        public ControlType getType() {
             return type;
         }
 
         @Override
         public String toString() {
-            return String.format("Subject: %s, Semester: %d," +
-                    "Type: %s, Grade: %s", subject, semester, type, grade);
+            return String.format("Subject: %s, Semester: %d, Type: %s, Grade: %s",
+                    subject, semester, type.getDescription(), grade.getDescription());
         }
     }
 
-    private final List<Grade> grades = new ArrayList<>();
-    private boolean isOnPaidForm = true;
-
     /**
      * Добавляет новую оценку в зачетную книжку.
-     *
-     * @param subject  Название предмета.
-     * @param semester Номер семестра.
-     * @param type     Тип контроля (например, экзамен, зачет).
-     * @param grade    Оценка (например, "отлично", "хорошо", "удовлетворительно").
      */
-    public void addGrade(String subject, int semester, String type, String grade) {
+    public void addGrade(String subject, int semester, ControlType type, GradeValue grade) {
         grades.add(new Grade(subject, semester, type, grade));
     }
 
     /**
      * Вычисляет текущий средний балл за все время обучения.
-     *
-     * @return Средний балл в виде числа с плавающей точкой.
      */
     public double calculateAverageGrade() {
-        int total = 0;
-        int count = 0;
-        for (Grade grade : grades) {
-            int numericGrade = convertGradeToNumber(grade.getGrade());
-            if (numericGrade != -1) {
-                total += numericGrade;
-                count++;
-            }
-        }
-        return count == 0 ? 0 : (double) total / count;
+        int total = grades.stream().mapToInt(grade -> grade.getGrade().getNumericValue()).sum();
+        return grades.isEmpty() ? 0 : (double) total / grades.size();
     }
 
     /**
      * Проверяет возможность перевода на бюджетную форму обучения.
-     *
-     * @return {@code true}, если перевод возможен, {@code false} в противном случае.
      */
     public boolean canTransferToBudget() {
+        if (!isOnPaidForm) return false;
+
         int currentSemester = getCurrentSemester();
         return grades.stream()
                 .filter(grade -> grade.getSemester() >= currentSemester - 1
-                        && grade.getType().equals("Экзамен"))
-                .noneMatch(grade -> grade.getGrade().equals("удовлетворительно"));
+                        && grade.getType() == ControlType.EXAM)
+                .noneMatch(grade -> grade.getGrade() == GradeValue.SATISFACTORY);
     }
 
     /**
      * Проверяет возможность получения красного диплома.
-     *
-     * @return {@code true}, если возможность получения красного диплома есть, {@code false} иначе.
      */
     public boolean canGetRedDiploma() {
-        long excellentCount = grades.stream()
-                .filter(grade -> grade.getGrade().equals("отлично"))
+        // Учитываем только последнюю оценку за курс
+        Map<String, Grade> latestGrades = getLatestGrades();
+
+        long excellentCount = latestGrades.values().stream()
+                .filter(grade -> grade.getGrade() == GradeValue.EXCELLENT)
                 .count();
-        long totalRelevantGrades = grades.stream()
-                .filter(grade -> grade.getType().equals("Экзамен")
-                        || grade.getType().equals("Дифференцированный зачет"))
+
+        long totalRelevantGrades = latestGrades.values().stream()
+                .filter(grade -> grade.getType() == ControlType.EXAM
+                        || grade.getType() == ControlType.DIFFERENTIATED_CREDIT)
                 .count();
 
-        boolean hasNoSatisfactory = grades.stream()
-                .noneMatch(grade -> grade.getGrade().equals("удовлетворительно"));
+        boolean hasNoSatisfactory = latestGrades.values().stream()
+                .noneMatch(grade -> grade.getGrade() == GradeValue.SATISFACTORY);
 
-        boolean thesisIsExcellent = grades.stream()
-                .anyMatch(grade -> grade.getType().equals("Квалификационная работа")
-                        && grade.getGrade().equals("отлично"));
+        boolean thesisIsExcellent = latestGrades.values().stream()
+                .anyMatch(grade -> grade.getType() == ControlType.THESIS
+                        && grade.getGrade() == GradeValue.EXCELLENT);
 
-        return excellentCount >= 0.75 * totalRelevantGrades && hasNoSatisfactory
+        return totalRelevantGrades > 0
+                && excellentCount >= 0.75 * totalRelevantGrades
+                && hasNoSatisfactory
                 && thesisIsExcellent;
     }
 
     /**
      * Проверяет возможность получения повышенной стипендии в текущем семестре.
-     *
-     * @return {@code true}, если стипендия возможна, {@code false} в противном случае.
      */
     public boolean canGetIncreasedScholarship() {
         int currentSemester = getCurrentSemester();
         return grades.stream()
                 .filter(grade -> grade.getSemester() == currentSemester
-                        && grade.getType().equals("Экзамен"))
-                .allMatch(grade -> grade.getGrade().equals("отлично"));
+                        && grade.getType() == ControlType.EXAM)
+                .allMatch(grade -> grade.getGrade() == GradeValue.EXCELLENT);
     }
 
     /**
      * Возвращает текущий семестр на основе добавленных оценок.
-     *
-     * @return Номер текущего семестра.
      */
     public int getCurrentSemester() {
         return grades.stream().mapToInt(Grade::getSemester).max().orElse(0);
     }
 
     /**
-     * Конвертирует строковую оценку в числовое представление.
-     *
-     * @param grade Строка, представляющая оценку (например, "отлично").
-     * @return Числовое значение оценки или -1, если оценка не числовая.
-     */
-    public int convertGradeToNumber(String grade) {
-        switch (grade) {
-            case "отлично":
-                return 5;
-            case "хорошо":
-                return 4;
-            case "удовлетворительно":
-                return 3;
-            default:
-                return -1;
-        }
-    }
-
-    /**
      * Устанавливает форму обучения (платная или бюджетная).
-     *
-     * @param isOnPaidForm {@code true}, если студент обучается на платной основе, {@code false} иначе.
      */
     public void setPaidForm(boolean isOnPaidForm) {
         this.isOnPaidForm = isOnPaidForm;
@@ -189,8 +224,6 @@ public class GradeBook {
 
     /**
      * Возвращает текущую форму обучения.
-     *
-     * @return {@code true}, если студент обучается на платной основе, {@code false} иначе.
      */
     public boolean isOnPaidForm() {
         return isOnPaidForm;
@@ -201,5 +234,17 @@ public class GradeBook {
      */
     public void printGrades() {
         grades.forEach(System.out::println);
+    }
+
+    /**
+     * Возвращает мапу с последними оценками за каждый предмет.
+     */
+    private Map<String, Grade> getLatestGrades() {
+        return grades.stream()
+                .collect(Collectors.toMap(
+                        Grade::getSubject,
+                        grade -> grade,
+                        (existing, replacement) -> replacement // Берем последнюю оценку
+                ));
     }
 }
