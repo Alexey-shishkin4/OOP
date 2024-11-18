@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"org.example","l":"GradeBook.Grade"},{"p":"org.example","l":"GradeBook"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"org.example","l":"GradeBook.ControlType"},{"p":"org.example","l":"GradeBook.Grade"},{"p":"org.example","l":"GradeBook"},{"p":"org.example","l":"GradeBook.GradeValue"}]
