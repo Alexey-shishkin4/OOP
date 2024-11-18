@@ -1,12 +1,10 @@
+import static org.junit.jupiter.api.Assertions.*;
+
 import org.example.GradeBook;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+
 
 class GradeBookTest {
 
@@ -48,8 +46,8 @@ class GradeBookTest {
     @Test
     void testCanGetRedDiplomaFalseDueToSatisfactory() {
         assertFalse(gradeBook.canGetRedDiploma(),
-                "Студент не должен иметь возможность" +
-                        "получения красного диплома из-за оценки 'удовлетворительно'");
+                "Студент не должен иметь возможность"
+                        + "получения красного диплома из-за оценки 'удовлетворительно'");
     }
 
     @Test
@@ -57,9 +55,9 @@ class GradeBookTest {
         gradeBook.addGrade("Thesis", 8,
                 GradeBook.ControlType.THESIS, GradeBook.GradeValue.GOOD);
         assertFalse(gradeBook.canGetRedDiploma(),
-                "Студент не должен иметь" +
-                        "возможность получения красного" +
-                        "диплома без оценки 'отлично' за дипломную работу");
+                "Студент не должен иметь"
+                        + "возможность получения красного"
+                        + "диплома без оценки 'отлично' за дипломную работу");
     }
 
     @Test
@@ -70,8 +68,8 @@ class GradeBookTest {
                 GradeBook.ControlType.EXAM, GradeBook.GradeValue.EXCELLENT);
 
         assertTrue(gradeBook.canGetIncreasedScholarship(),
-                "Студент должен иметь возможность" +
-                        "получения повышенной стипендии");
+                "Студент должен иметь возможность"
+                        + "получения повышенной стипендии");
     }
 
     @Test
