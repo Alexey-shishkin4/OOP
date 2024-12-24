@@ -69,7 +69,7 @@ public class CardTest {
     @Test
     public void testToString() {
         Card card = new Card("A", "Hearts");
-        assertEquals("A of Hearts", card.toString(),
+        assertEquals("A of Hearts (11)", card.toString(),
                 "Card string should be 'A of Hearts'");
     }
 
