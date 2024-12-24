@@ -247,11 +247,11 @@ public class Game {
 
         for (int i = 0; i < hand.size(); i++) {
             if (!showAll && i == 1 && player.isDealer()) {
-                handString.append("<Hidden card>");
+                hand.get(i).setClosed(true); // Mark the card as hidden
             } else {
-                handString.append(hand.get(i).getSuit())
-                        .append(" (").append(hand.get(i).getValue()).append(")");
+                hand.get(i).setClosed(false);
             }
+            handString.append(hand.get(i).toString());
 
             if (i != hand.size() - 1) {
                 handString.append(", ");

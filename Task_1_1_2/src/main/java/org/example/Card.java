@@ -11,7 +11,7 @@ package org.example;
 public class Card {
     private String rank;  // The rank of the card (2-10, J, Q, K, A)
     private String suit;  // The suit of the card (Hearts, Diamonds, Clubs, Spades)
-    private boolean closed; // hidden or visible
+    private boolean closed;
 
     /**
      * Initializes a new {@code Card} object
@@ -63,6 +63,10 @@ public class Card {
         }
     }
 
+    public void setClosed(boolean closed) {
+        this.closed = closed;
+    }
+
     /**
      * Returns a string representation of the card,
      * including both its rank and suit.
@@ -73,8 +77,8 @@ public class Card {
     @Override
     public String toString() {
         if (closed) {
-            return "[Hidden]";
+            return "<Hidden card>";
         }
-        return rank + " of " + suit;
+        return rank + " of " + suit + " (" + getValue() + ")";
     }
 }
